@@ -1,0 +1,768 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="BDAB3FD5-7C2D-4289-82BB-7BF444D6FD57" Name="ScriptRunner" Language="1033" Version="1.0.0.1" Manufacturer="ScriptRunner" UpgradeCode="9D06A99A-D91E-46CC-8817-DA0591C7FA02">
+		<Package Description="ScriptRunner" Comments="ScriptRunner" InstallerVersion="200" Compressed="yes"/>
+		<Media Id="1" Cabinet="simple.cab" EmbedCab="yes"/>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="PerUserProgramDir" Name="PFiles">
+				<Directory Id="SCRIPTRUNNER" Name="ScriptRunner">
+					<Component Id="ICSHARPCODE.AVALONEDIT.DLL" DiskId="1" Guid="E9C98086-D3FD-4529-A3EC-C6EBED066A38">
+						<File Id="ICSHARPCODE.AVALONEDIT.DLL" Name="ICSharpCode.AvalonEdit.dll" Source="ScriptRunner\ICSharpCode.AvalonEdit.dll"/>
+					</Component>
+					<Component Id="ICSHARPCODE.AVALONEDIT.XML" DiskId="1" Guid="36C7C650-5BE6-4CDA-89CB-E0D30ED8BDC7">
+						<File Id="ICSHARPCODE.AVALONEDIT.XML" Name="ICSharpCode.AvalonEdit.xml" Source="ScriptRunner\ICSharpCode.AvalonEdit.xml"/>
+					</Component>
+					<Component Id="MICROSOFT.MANAGEMENT.INFRASTRUCTURE.DLL" DiskId="1" Guid="E6BA0B3C-1012-4660-A88A-FC7156404A6A">
+						<File Id="MICROSOFT.MANAGEMENT.INFRASTRUCTURE.DLL" Name="Microsoft.Management.Infrastructure.dll" Source="ScriptRunner\Microsoft.Management.Infrastructure.dll"/>
+					</Component>
+					<Component Id="NEWTONSOFT.JSON.DLL" DiskId="1" Guid="E8B31103-28A8-4BC9-92A4-BFFB34F179E0">
+						<File Id="NEWTONSOFT.JSON.DLL" Name="Newtonsoft.Json.dll" Source="ScriptRunner\Newtonsoft.Json.dll"/>
+					</Component>
+					<Component Id="NEWTONSOFT.JSON.XML" DiskId="1" Guid="C9AAFD6F-C5A1-4B39-BD75-10E4C87D991B">
+						<File Id="NEWTONSOFT.JSON.XML" Name="Newtonsoft.Json.xml" Source="ScriptRunner\Newtonsoft.Json.xml"/>
+					</Component>
+					<Component Id="PROPERTYTOOLS.DLL" DiskId="1" Guid="F7B70D97-9839-4EE7-9EA8-F3D53FC0A804">
+						<File Id="PROPERTYTOOLS.DLL" Name="PropertyTools.dll" Source="ScriptRunner\PropertyTools.dll"/>
+					</Component>
+					<Component Id="PROPERTYTOOLS.WPF.DLL" DiskId="1" Guid="B628B3C3-2B3E-433F-A8A1-8F80C0CAD13F">
+						<File Id="PROPERTYTOOLS.WPF.DLL" Name="PropertyTools.Wpf.dll" Source="ScriptRunner\PropertyTools.Wpf.dll"/>
+					</Component>
+					<Component Id="SCRIPT.APPLICATION" DiskId="1" Guid="E2EF00EA-D749-47E5-9C6D-A222B46777A8">
+						<File Id="SCRIPT.APPLICATION" Name="Script.application" Source="ScriptRunner\Script.application"/>
+					</Component>
+					<Component Id="SCRIPT.PDB" DiskId="1" Guid="DCD227B7-1B36-4E50-80B1-E53167F21002">
+						<File Id="SCRIPT.PDB" Name="Script.pdb" Source="ScriptRunner\Script.pdb"/>
+					</Component>
+					<Component Id="SCRIPTRUNNER.EXE" DiskId="1" Guid="176D9D68-731A-404B-924E-CE45B027B441">
+						<File Id="SCRIPTRUNNER.EXE" Name="ScriptRunner.exe" Source="ScriptRunner\ScriptRunner.exe"/>
+						 <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" />
+							<Shortcut Id="desktopShortcut" Directory="DesktopFolder" Name="ScriptRunner" WorkingDirectory="INSTALLDIR" Advertise="no" Icon="DesktopIcon.exe" IconIndex="0"/>
+							<Shortcut Id="ExeShortcut" Directory="PerUserProgramDir" Name="ScriptRunner" Advertise="no" Icon="StartMenuIcon.exe" IconIndex="0"/>
+						</File>
+					</Component>
+					<Component Id="SCRIPTRUNNER.EXE.CONFIG" DiskId="1" Guid="6106B3C4-D5F1-4754-A051-11EFE5646507">
+						<File Id="SCRIPTRUNNER.EXE.CONFIG" Name="ScriptRunner.exe.config" Source="ScriptRunner\ScriptRunner.exe.config"/>
+					</Component>
+					<Component Id="SCRIPTRUNNER.EXE.MANIFEST" DiskId="1" Guid="897C1DF4-4E74-48CE-AD18-243D571A6842">
+						<File Id="SCRIPTRUNNER.EXE.MANIFEST" Name="ScriptRunner.exe.manifest" Source="ScriptRunner\ScriptRunner.exe.manifest"/>
+					</Component>
+					<Component Id="SYSTEM.CODEDOM.DLL" DiskId="1" Guid="30503039-2EC8-48A1-A7D4-81056A8FE1CD">
+						<File Id="SYSTEM.CODEDOM.DLL" Name="System.CodeDom.dll" Source="ScriptRunner\System.CodeDom.dll"/>
+					</Component>
+					<Component Id="SYSTEM.CODEDOM.XML" DiskId="1" Guid="5857E5CE-9141-416C-BF30-CAC7BE79BA70">
+						<File Id="SYSTEM.CODEDOM.XML" Name="System.CodeDom.xml" Source="ScriptRunner\System.CodeDom.xml"/>
+					</Component>
+					<Component Id="SYSTEM.MANAGEMENT.AUTOMATION.DLL" DiskId="1" Guid="80A217DE-06DA-432F-B0BD-7FDD1C2C9AE5">
+						<File Id="SYSTEM.MANAGEMENT.AUTOMATION.DLL" Name="System.Management.Automation.dll" Source="ScriptRunner\System.Management.Automation.dll"/>
+					</Component>
+					<Component Id="SYSTEM.MANAGEMENT.AUTOMATION.XML" DiskId="1" Guid="344BE246-FE47-4289-A492-FD0273E54305">
+						<File Id="SYSTEM.MANAGEMENT.AUTOMATION.XML" Name="System.Management.Automation.xml" Source="ScriptRunner\System.Management.Automation.xml"/>
+					</Component>
+					<Directory Id="CLASSES" Name="Classes">
+						<Component Id="ZPOWERSHELL.XSHD" DiskId="1" Guid="E0B30235-1C64-46B9-8EF1-3338A9F6E418">
+							<File Id="ZPOWERSHELL.XSHD" Name="zPowershell.xshd" Source="ScriptRunner\Classes\zPowershell.xshd"/>
+						</Component>
+					</Directory>
+					<Directory Id="IMAGES" Name="Images">
+						<Component Id="_4.ICO" DiskId="1" Guid="45FB0F45-E94F-4C75-AE21-C6C4DC97EBF8">
+							<File Id="_4.ICO" Name="4.ico" Source="ScriptRunner\Images\4.ico"/>
+						</Component>
+						<Component Id="_93025861_5178_4FCD_BDF0_80690723D666.ICO" DiskId="1" Guid="E8112BE4-836E-4649-A6AA-AFB77FE73D1D">
+							<File Id="_93025861_5178_4FCD_BDF0_80690723D666.ICO" Name="93025861-5178-4fcd-bdf0-80690723d666.ico" Source="ScriptRunner\Images\93025861-5178-4fcd-bdf0-80690723d666.ico"/>
+						</Component>
+						<Component Id="_93025861_5178_4FCD_BDF0_80690723D666.PNG" DiskId="1" Guid="8EBD46C5-6F03-45BA-B431-A7C8145DF50F">
+							<File Id="_93025861_5178_4FCD_BDF0_80690723D666.PNG" Name="93025861-5178-4fcd-bdf0-80690723d666.png" Source="ScriptRunner\Images\93025861-5178-4fcd-bdf0-80690723d666.png"/>
+						</Component>
+						<Component Id="GREAT_SEAL_OF_THE_STATE_OF_MINNESOTA.PNG" DiskId="1" Guid="9DFDFB97-E01F-40A3-8EB3-C83020B84284">
+							<File Id="GREAT_SEAL_OF_THE_STATE_OF_MINNESOTA.PNG" Name="great-seal-of-the-state-of-minnesota.png" Source="ScriptRunner\Images\great-seal-of-the-state-of-minnesota.png"/>
+						</Component>
+						<Component Id="REMEDYQUERYRUNNER.1004.ICO" DiskId="1" Guid="E66A62D4-238D-46E3-9EA8-8FF595809F42">
+							<File Id="REMEDYQUERYRUNNER.1004.ICO" Name="RemedyQueryRunner.1004.ico" Source="ScriptRunner\Images\RemedyQueryRunner.1004.ico"/>
+						</Component>
+					</Directory>
+					<Directory Id="SCRIPTS" Name="Scripts">
+						<Component Id="WMIQUERIES.JSON" DiskId="1" Guid="EC9C71AA-3641-4373-8D7D-F52AADA9C6D5">
+							<File Id="WMIQUERIES.JSON" Name="wmiQueries.json" Source="ScriptRunner\Scripts\wmiQueries.json"/>
+						</Component>
+						<Component Id="WMIQUERIES.JSON.BAK" DiskId="1" Guid="5BF5DBFA-5413-4DC4-B694-07FAC63328E2">
+							<File Id="WMIQUERIES.JSON.BAK" Name="wmiQueries.json.bak" Source="ScriptRunner\Scripts\wmiQueries.json.bak"/>
+						</Component>
+						<Directory Id="DOMAIN" Name="Domain">
+							<Component Id="GET_AD_SITE.PS1" DiskId="1" Guid="08946226-DAD5-4B93-A3EC-2BDEFF5949DA">
+								<File Id="GET_AD_SITE.PS1" Name="Get AD Site.ps1" Source="ScriptRunner\Scripts\Domain\Get AD Site.ps1"/>
+							</Component>
+						</Directory>
+						<Directory Id="NETWORK" Name="Network">
+							<Component Id="FIX_BRANCHCACHE.PS1" DiskId="1" Guid="B4357115-F0EC-4EA3-9237-77979E59B4B8">
+								<File Id="FIX_BRANCHCACHE.PS1" Name="FIX-BranchCache.ps1" Source="ScriptRunner\Scripts\Network\FIX-BranchCache.ps1"/>
+							</Component>
+							<Component Id="FIX_REMOTECOMISSUES.PS1" DiskId="1" Guid="4EAE2351-1EBC-47EC-9563-D6BF5AFEDDDC">
+								<File Id="FIX_REMOTECOMISSUES.PS1" Name="Fix-remoteComIssues.ps1" Source="ScriptRunner\Scripts\Network\Fix-remoteComIssues.ps1"/>
+							</Component>
+							<Component Id="FIX_STUCKBITSJOBS.PS1" DiskId="1" Guid="8D42CF66-7B50-40F3-AD99-0441F0E5504F">
+								<File Id="FIX_STUCKBITSJOBS.PS1" Name="FIX-StuckBITSJobs.ps1" Source="ScriptRunner\Scripts\Network\FIX-StuckBITSJobs.ps1"/>
+							</Component>
+							<Component Id="FIX_WMI.PS1" DiskId="1" Guid="CFE9C2B5-76B6-4099-8BD8-A91677666D0F">
+								<File Id="FIX_WMI.PS1" Name="FIX-WMI.ps1" Source="ScriptRunner\Scripts\Network\FIX-WMI.ps1"/>
+							</Component>
+							<Component Id="GET_IP.PS1" DiskId="1" Guid="8114998A-51B7-4237-9914-632E247434BB">
+								<File Id="GET_IP.PS1" Name="Get IP.ps1" Source="ScriptRunner\Scripts\Network\Get IP.ps1"/>
+							</Component>
+							<Component Id="GET_SWITCHINFO.PS1" DiskId="1" Guid="4B29ADF3-B45E-401C-AA53-077042D2A3AF">
+								<File Id="GET_SWITCHINFO.PS1" Name="get-switchinfo.ps1" Source="ScriptRunner\Scripts\Network\get-switchinfo.ps1"/>
+							</Component>
+							<Component Id="GETSWITCHINFO.PS1" DiskId="1" Guid="F9F7E131-DACB-4869-B4F6-6F2CE5356553">
+								<File Id="GETSWITCHINFO.PS1" Name="GetSwitchInfo.ps1" Source="ScriptRunner\Scripts\Network\GetSwitchInfo.ps1"/>
+							</Component>
+							<Component Id="WOL_ENABLE.PS1" DiskId="1" Guid="42E141C8-5EDC-449F-B6A8-1E23CC8BC2C5">
+								<File Id="WOL_ENABLE.PS1" Name="WOL-Enable.ps1" Source="ScriptRunner\Scripts\Network\WOL-Enable.ps1"/>
+							</Component>
+						</Directory>
+						<Directory Id="SCCM" Name="SCCM">
+							<Component Id="_0_SCCM_TOTALREPAIR.PS1" DiskId="1" Guid="D60305A5-F78F-429A-A591-B42FC9A22E1F">
+								<File Id="_0_SCCM_TOTALREPAIR.PS1" Name="0_SCCM-TotalRepair.ps1" Source="ScriptRunner\Scripts\SCCM\0_SCCM-TotalRepair.ps1"/>
+							</Component>
+							<Component Id="_1_EVALUATE_APPLICATION_DEPLOYMENT.PS1" DiskId="1" Guid="6E67C352-7A98-4E0A-9586-740B54E3A33A">
+								<File Id="_1_EVALUATE_APPLICATION_DEPLOYMENT.PS1" Name="1_Evaluate application deployment.ps1" Source="ScriptRunner\Scripts\SCCM\1_Evaluate application deployment.ps1"/>
+							</Component>
+							<Component Id="_1_EVALUATE_MACHINE_POLICY.PS1" DiskId="1" Guid="360B7A6D-0588-4DB5-9506-BFE817BE101A">
+								<File Id="_1_EVALUATE_MACHINE_POLICY.PS1" Name="1_Evaluate machine policy.ps1" Source="ScriptRunner\Scripts\SCCM\1_Evaluate machine policy.ps1"/>
+							</Component>
+							<Component Id="_1_RUN_HEALTHTASK.PS1" DiskId="1" Guid="FF717979-F488-4F21-B4EC-765CE9A16283">
+								<File Id="_1_RUN_HEALTHTASK.PS1" Name="1_RUN-HealthTask.ps1" Source="ScriptRunner\Scripts\SCCM\1_RUN-HealthTask.ps1"/>
+							</Component>
+							<Component Id="_1_UPDATE_SCAN_AND_EVAL.PS1" DiskId="1" Guid="8262B55C-AE35-4726-89C3-ED19F55111A6">
+								<File Id="_1_UPDATE_SCAN_AND_EVAL.PS1" Name="1_Update Scan and Eval.ps1" Source="ScriptRunner\Scripts\SCCM\1_Update Scan and Eval.ps1"/>
+							</Component>
+							<Component Id="_8PM_RESTART_ENFORCED.PS1" DiskId="1" Guid="C81607CF-84C7-4DE8-ACAD-77CDB7AFFF33">
+								<File Id="_8PM_RESTART_ENFORCED.PS1" Name="8pm Restart enforced.ps1" Source="ScriptRunner\Scripts\SCCM\8pm Restart enforced.ps1"/>
+							</Component>
+							<Component Id="CANPROGRAMRUNNOW.PS1" DiskId="1" Guid="BE0B3EC6-677F-4347-A8F2-474F4E282391">
+								<File Id="CANPROGRAMRUNNOW.PS1" Name="CanProgramRunNow.ps1" Source="ScriptRunner\Scripts\SCCM\CanProgramRunNow.ps1"/>
+							</Component>
+							<Component Id="CANUPDATERUNNOW.PS1" DiskId="1" Guid="8BF3525A-0BB9-4E21-8EC5-E1B1A3F50E12">
+								<File Id="CANUPDATERUNNOW.PS1" Name="CanUpdateRunNow.ps1" Source="ScriptRunner\Scripts\SCCM\CanUpdateRunNow.ps1"/>
+							</Component>
+							<Component Id="COUNT_MISSING_UPDATES.PS1" DiskId="1" Guid="1C77CD9C-D002-4D93-8199-D096C6CF32D5">
+								<File Id="COUNT_MISSING_UPDATES.PS1" Name="Count missing updates.ps1" Source="ScriptRunner\Scripts\SCCM\Count missing updates.ps1"/>
+							</Component>
+							<Component Id="GET_WSUSCONTENTINFO.PS1" DiskId="1" Guid="49DE55B8-50AC-4574-8A7A-78BE01117AE9">
+								<File Id="GET_WSUSCONTENTINFO.PS1" Name="GET-WSUScontentInfo.ps1" Source="ScriptRunner\Scripts\SCCM\GET-WSUScontentInfo.ps1"/>
+							</Component>
+							<Component Id="INSTALL_ALL_MANDATORY_UPDATES.PS1" DiskId="1" Guid="1AFC75F0-6348-49C6-8A54-911C119E5899">
+								<File Id="INSTALL_ALL_MANDATORY_UPDATES.PS1" Name="Install all mandatory updates.ps1" Source="ScriptRunner\Scripts\SCCM\Install all mandatory updates.ps1"/>
+							</Component>
+							<Component Id="NOTIFY_USEROFREBOOT.PS1" DiskId="1" Guid="B90F26BE-4EB9-4C42-AC7D-F299871736A8">
+								<File Id="NOTIFY_USEROFREBOOT.PS1" Name="Notify-UserOfReboot.ps1" Source="ScriptRunner\Scripts\SCCM\Notify-UserOfReboot.ps1"/>
+							</Component>
+							<Component Id="NOTIFY_USEROFUPDATES.PS1" DiskId="1" Guid="1B3ADBB1-77CC-40D7-9AEC-50DBDCD6E104">
+								<File Id="NOTIFY_USEROFUPDATES.PS1" Name="Notify-UserOfUpdates.ps1" Source="ScriptRunner\Scripts\SCCM\Notify-UserOfUpdates.ps1"/>
+							</Component>
+							<Component Id="RESTARTCCMEXEC.PS1" DiskId="1" Guid="E82C6DB1-E790-47AB-94F6-7F38E7127535">
+								<File Id="RESTARTCCMEXEC.PS1" Name="RestartCCMEXEC.ps1" Source="ScriptRunner\Scripts\SCCM\RestartCCMEXEC.ps1"/>
+							</Component>
+							<Component Id="RESTARTCCMSETUP.PS1" DiskId="1" Guid="9979E752-9797-4777-89F7-B2255D8B447D">
+								<File Id="RESTARTCCMSETUP.PS1" Name="RestartCCMSetUP.ps1" Source="ScriptRunner\Scripts\SCCM\RestartCCMSetUP.ps1"/>
+							</Component>
+							<Component Id="RUN_HEALTHTASK.PS1" DiskId="1" Guid="8B719F31-709A-401E-AAA4-E05D1F1F9D87">
+								<File Id="RUN_HEALTHTASK.PS1" Name="RUN-HealthTask.ps1" Source="ScriptRunner\Scripts\SCCM\RUN-HealthTask.ps1"/>
+							</Component>
+							<Component Id="SCCM_AUTOUPDATECLIENT.PS1" DiskId="1" Guid="86D5A347-113F-4985-A7AC-2D69632C7DEB">
+								<File Id="SCCM_AUTOUPDATECLIENT.PS1" Name="SCCM-AutoUpdateClient.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-AutoUpdateClient.ps1"/>
+							</Component>
+							<Component Id="SCCM_CANCELPENDINGREBOOT.PS1" DiskId="1" Guid="BE795ED4-E30B-4366-8F83-E60AD8C067CF">
+								<File Id="SCCM_CANCELPENDINGREBOOT.PS1" Name="SCCM-CANCELPendingReboot.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-CANCELPendingReboot.ps1"/>
+							</Component>
+							<Component Id="SCCM_CERTCHECK.PS1" DiskId="1" Guid="DB891710-AC69-4D7A-B1A9-8890290EC2AF">
+								<File Id="SCCM_CERTCHECK.PS1" Name="SCCM-CertCheck.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-CertCheck.ps1"/>
+							</Component>
+							<Component Id="SCCM_CHANGEFORCEDREBOOT2NON_FORCED.PS1" DiskId="1" Guid="4ED34A62-5E98-435B-825C-34FB48718067">
+								<File Id="SCCM_CHANGEFORCEDREBOOT2NON_FORCED.PS1" Name="SCCM-ChangeForcedReboot2Non-forced.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-ChangeForcedReboot2Non-forced.ps1"/>
+							</Component>
+							<Component Id="SCCM_DP_LEDBATCHECKANDFIX.PS1" DiskId="1" Guid="0298011B-EDB7-4901-A204-71EF2573E76A">
+								<File Id="SCCM_DP_LEDBATCHECKANDFIX.PS1" Name="SCCM-DP-LEDBATCheckAndFIX.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-DP-LEDBATCheckAndFIX.ps1"/>
+							</Component>
+							<Component Id="SCCM_FORCE_INSTALL_OF_SOFTWARE_UPDATES.PS1" DiskId="1" Guid="7545E722-44B0-4677-A9B1-C2FCB22B819F">
+								<File Id="SCCM_FORCE_INSTALL_OF_SOFTWARE_UPDATES.PS1" Name="SCCM-force-install-of-software-updates.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-force-install-of-software-updates.ps1"/>
+							</Component>
+							<Component Id="SCCM_REBOOTWITHTIMER.PS1" DiskId="1" Guid="EABFB9AE-AAAF-4394-910A-3A04A851B5B5">
+								<File Id="SCCM_REBOOTWITHTIMER.PS1" Name="SCCM-RebootWithTimer.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-RebootWithTimer.ps1"/>
+							</Component>
+							<Component Id="SCCM_REPAIR.PS1" DiskId="1" Guid="BDEA60E8-7590-4487-8A6F-313253040077">
+								<File Id="SCCM_REPAIR.PS1" Name="SCCM-Repair.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-Repair.ps1"/>
+							</Component>
+							<Component Id="SCCM_RESET_GUID.PS1" DiskId="1" Guid="36FDFEAD-66F9-4FA7-9133-25F49924A196">
+								<File Id="SCCM_RESET_GUID.PS1" Name="SCCM-Reset GUID.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-Reset GUID.ps1"/>
+							</Component>
+							<Component Id="SCCM_RESETINVENTORY.PS1" DiskId="1" Guid="06055912-C08F-4F51-BC50-1EE7BC682085">
+								<File Id="SCCM_RESETINVENTORY.PS1" Name="SCCM-ResetInventory.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-ResetInventory.ps1"/>
+							</Component>
+							<Component Id="SCCM_RESETREBOOTCOUNTDOWN.PS1" DiskId="1" Guid="FF7BAFDF-0559-4BA6-BF07-FCEE679C56D6">
+								<File Id="SCCM_RESETREBOOTCOUNTDOWN.PS1" Name="SCCM-ResetRebootCountdown.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-ResetRebootCountdown.ps1"/>
+							</Component>
+							<Component Id="SCCM_RETRYTASK.PS1" DiskId="1" Guid="22DBCB24-DA7D-406D-9A77-2F53F49C040E">
+								<File Id="SCCM_RETRYTASK.PS1" Name="SCCM-RetryTASK.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-RetryTASK.ps1"/>
+							</Component>
+							<Component Id="SCCM_RUNDPCONTENTVALDATIONNOW.PS1" DiskId="1" Guid="005CA0DA-1EC8-4613-A281-1B60FEDBBBBD">
+								<File Id="SCCM_RUNDPCONTENTVALDATIONNOW.PS1" Name="SCCM-RunDPContentValdationNOW.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-RunDPContentValdationNOW.ps1"/>
+							</Component>
+							<Component Id="SCCM_SHOWNUMBEROFUPDATESANDRUN.PS1" DiskId="1" Guid="4DD5E433-EC42-47E2-856B-F3C1609616E9">
+								<File Id="SCCM_SHOWNUMBEROFUPDATESANDRUN.PS1" Name="SCCM-ShowNumberOfUpdatesAndRun.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-ShowNumberOfUpdatesAndRun.ps1"/>
+							</Component>
+							<Component Id="SCCM_UNINSTALL_REINSTALL.PS1" DiskId="1" Guid="6107EB2C-464E-4556-8698-DAEFA1FD9D3C">
+								<File Id="SCCM_UNINSTALL_REINSTALL.PS1" Name="SCCM-UNINSTALL-REINSTALL.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-UNINSTALL-REINSTALL.ps1"/>
+							</Component>
+							<Component Id="SCCM_UPATESCAN.PS1" DiskId="1" Guid="938F1E7A-8F46-442A-A208-B6BB8F5D1A13">
+								<File Id="SCCM_UPATESCAN.PS1" Name="SCCM-UpateScan.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-UpateScan.ps1"/>
+							</Component>
+							<Component Id="SCCM_UPDATETASK.PS1" DiskId="1" Guid="F06E7A05-C1FB-40DC-8D75-0CDDA461AD1F">
+								<File Id="SCCM_UPDATETASK.PS1" Name="SCCM-UpdateTASK.ps1" Source="ScriptRunner\Scripts\SCCM\SCCM-UpdateTASK.ps1"/>
+							</Component>
+							<Component Id="SUREFIXSCCMCLIENT.PS1" DiskId="1" Guid="738A2724-24F5-40B8-B809-5DF695024DCA">
+								<File Id="SUREFIXSCCMCLIENT.PS1" Name="SureFixSccmClient.ps1" Source="ScriptRunner\Scripts\SCCM\SureFixSccmClient.ps1"/>
+							</Component>
+							<Component Id="WSUS_SERVICECHECK.PS1" DiskId="1" Guid="42C93CD8-5F66-4F75-AA70-149C0EEFAB90">
+								<File Id="WSUS_SERVICECHECK.PS1" Name="WSUS-ServiceCheck.ps1" Source="ScriptRunner\Scripts\SCCM\WSUS-ServiceCheck.ps1"/>
+							</Component>
+						</Directory>
+						<Directory Id="SYSTEM" Name="System">
+							<Component Id="CERTCHECK_PKI.PS1" DiskId="1" Guid="5989AD4F-3DE4-4589-B75A-9C7535285A35">
+								<File Id="CERTCHECK_PKI.PS1" Name="CertCheck-PKI.ps1" Source="ScriptRunner\Scripts\System\CertCheck-PKI.ps1"/>
+							</Component>
+							<Component Id="CERTCHECK.PS1" DiskId="1" Guid="DAF84B19-3E10-459E-9841-EAE002F7D6DD">
+								<File Id="CERTCHECK.PS1" Name="CertCheck.ps1" Source="ScriptRunner\Scripts\System\CertCheck.ps1"/>
+							</Component>
+							<Component Id="CHK_IF_VM.PS1" DiskId="1" Guid="4EEB590F-987D-4C00-9B64-08A5859EBE6F">
+								<File Id="CHK_IF_VM.PS1" Name="CHK-if VM.ps1" Source="ScriptRunner\Scripts\System\CHK-if VM.ps1"/>
+							</Component>
+							<Component Id="CHK_PCNAMEVSSN.PS1" DiskId="1" Guid="5FE76958-B83D-431C-BE8F-853A05D01C02">
+								<File Id="CHK_PCNAMEVSSN.PS1" Name="CHK-PCnameVSSN.ps1" Source="ScriptRunner\Scripts\System\CHK-PCnameVSSN.ps1"/>
+							</Component>
+							<Component Id="DEL_ALLUSERTEMP.PS1" DiskId="1" Guid="DB3E3714-85D7-4991-B252-A2912A4E0793">
+								<File Id="DEL_ALLUSERTEMP.PS1" Name="DEL-AllUserTemp.ps1" Source="ScriptRunner\Scripts\System\DEL-AllUserTemp.ps1"/>
+							</Component>
+							<Component Id="DEL_LOCAL_EXPIRED_CERTSV2.PS1" DiskId="1" Guid="1251072F-DEE3-4482-84D0-F6BEE2441517">
+								<File Id="DEL_LOCAL_EXPIRED_CERTSV2.PS1" Name="DEL_local_expired_Certsv2.ps1" Source="ScriptRunner\Scripts\System\DEL_local_expired_Certsv2.ps1"/>
+							</Component>
+							<Component Id="FILE_CHECK_SFD.PS1" DiskId="1" Guid="A2FB35F8-50A1-416E-A5ED-3722BC55427C">
+								<File Id="FILE_CHECK_SFD.PS1" Name="FILE Check-SFD.ps1" Source="ScriptRunner\Scripts\System\FILE Check-SFD.ps1"/>
+							</Component>
+							<Component Id="FIX_TEMPORARYPROFILE.PS1" DiskId="1" Guid="B2988D3B-2CFB-49E7-A040-AC1A3943D5FA">
+								<File Id="FIX_TEMPORARYPROFILE.PS1" Name="Fix-TemporaryProfile.ps1" Source="ScriptRunner\Scripts\System\Fix-TemporaryProfile.ps1"/>
+							</Component>
+							<Component Id="FIX_WINDOWSUPDATE.PS1" DiskId="1" Guid="3FC37B68-A16C-4EFA-B4C5-DA3BA2220EE8">
+								<File Id="FIX_WINDOWSUPDATE.PS1" Name="FIX-WindowsUpdate.ps1" Source="ScriptRunner\Scripts\System\FIX-WindowsUpdate.ps1"/>
+							</Component>
+							<Component Id="FIX_WUAANDMWERROS.PS1" DiskId="1" Guid="A76B5B0D-8A24-4908-8012-7B19CA618E2B">
+								<File Id="FIX_WUAANDMWERROS.PS1" Name="FIX-WUAandMWerros.ps1" Source="ScriptRunner\Scripts\System\FIX-WUAandMWerros.ps1"/>
+							</Component>
+							<Component Id="FIXALLCORRUPTION1STSTEP.PS1" DiskId="1" Guid="92503513-1C6E-447D-B0DE-8F3F4E5DD916">
+								<File Id="FIXALLCORRUPTION1STSTEP.PS1" Name="FixAllCorruption1stStep.ps1" Source="ScriptRunner\Scripts\System\FixAllCorruption1stStep.ps1"/>
+							</Component>
+							<Component Id="FREE_DISK_SPACE.PS1" DiskId="1" Guid="B194BC9F-A6D5-43DF-A08B-236572D10FA0">
+								<File Id="FREE_DISK_SPACE.PS1" Name="Free disk space.ps1" Source="ScriptRunner\Scripts\System\Free disk space.ps1"/>
+							</Component>
+							<Component Id="GENERATE_WINDOWSUPDATELOG.PS1" DiskId="1" Guid="61002344-37DE-4CC0-85B3-E14E8D4B36E7">
+								<File Id="GENERATE_WINDOWSUPDATELOG.PS1" Name="Generate_WindowsUpdateLog.ps1" Source="ScriptRunner\Scripts\System\Generate_WindowsUpdateLog.ps1"/>
+							</Component>
+							<Component Id="GET_LAST_INSTALLED_UPDATES.PS1" DiskId="1" Guid="B3DAF67B-AE3E-4D15-B997-65C5A4A53343">
+								<File Id="GET_LAST_INSTALLED_UPDATES.PS1" Name="Get last installed updates.ps1" Source="ScriptRunner\Scripts\System\Get last installed updates.ps1"/>
+							</Component>
+							<Component Id="GET_LOGGED_ON_USER.PS1" DiskId="1" Guid="52A1E966-34E7-46C1-8C4B-5C14643F4820">
+								<File Id="GET_LOGGED_ON_USER.PS1" Name="Get logged on user.ps1" Source="ScriptRunner\Scripts\System\Get logged on user.ps1"/>
+							</Component>
+							<Component Id="GET_MODEL.PS1" DiskId="1" Guid="68904696-9340-4429-8347-93E04FF42E43">
+								<File Id="GET_MODEL.PS1" Name="Get Model.ps1" Source="ScriptRunner\Scripts\System\Get Model.ps1"/>
+							</Component>
+							<Component Id="GET_OS_VERSION.PS1" DiskId="1" Guid="5674C35A-D7EB-4834-9FE5-A04AA4DCE074">
+								<File Id="GET_OS_VERSION.PS1" Name="Get OS Version.ps1" Source="ScriptRunner\Scripts\System\Get OS Version.ps1"/>
+							</Component>
+							<Component Id="GET_POWERSHELL_VERSION.PS1" DiskId="1" Guid="F13CEEFA-E546-4B8C-8F76-E5F889A5CE9F">
+								<File Id="GET_POWERSHELL_VERSION.PS1" Name="Get PowerShell Version.ps1" Source="ScriptRunner\Scripts\System\Get PowerShell Version.ps1"/>
+							</Component>
+							<Component Id="GET_USER_DIR_SIZE.PS1" DiskId="1" Guid="A6D2CD39-2B88-4EEE-9FFD-8AEADF66B0AE">
+								<File Id="GET_USER_DIR_SIZE.PS1" Name="Get User DIR Size.ps1" Source="ScriptRunner\Scripts\System\Get User DIR Size.ps1"/>
+							</Component>
+							<Component Id="GET_BATTERYSTATS.PS1" DiskId="1" Guid="9FA5F71E-2336-418B-BC5C-8E3FE923786D">
+								<File Id="GET_BATTERYSTATS.PS1" Name="Get-BatteryStats.ps1" Source="ScriptRunner\Scripts\System\Get-BatteryStats.ps1"/>
+							</Component>
+							<Component Id="GET_COMPUTERDRIVERS.PS1" DiskId="1" Guid="B265B86D-556E-417F-B998-C0F454547F02">
+								<File Id="GET_COMPUTERDRIVERS.PS1" Name="Get-ComputerDrivers.ps1" Source="ScriptRunner\Scripts\System\Get-ComputerDrivers.ps1"/>
+							</Component>
+							<Component Id="GET_COMPUTERDRIVERS.PS1.BAK" DiskId="1" Guid="BFCD4366-96AA-48F0-A9EB-5EE7559477EA">
+								<File Id="GET_COMPUTERDRIVERS.PS1.BAK" Name="Get-ComputerDrivers.ps1.bak" Source="ScriptRunner\Scripts\System\Get-ComputerDrivers.ps1.bak"/>
+							</Component>
+							<Component Id="GET_LASTREBOOT.PS1" DiskId="1" Guid="93D66055-1221-491C-AA21-4D79D53CEDD9">
+								<File Id="GET_LASTREBOOT.PS1" Name="Get-LastReboot.ps1" Source="ScriptRunner\Scripts\System\Get-LastReboot.ps1"/>
+							</Component>
+							<Component Id="GET_PENDINGREBOOT.PS1" DiskId="1" Guid="30931B59-5AB2-487F-B21D-579D5C6882B7">
+								<File Id="GET_PENDINGREBOOT.PS1" Name="Get-PendingReboot.ps1" Source="ScriptRunner\Scripts\System\Get-PendingReboot.ps1"/>
+							</Component>
+							<Component Id="GET_USBDEVICES.PS1" DiskId="1" Guid="A1704712-A493-4BA8-8591-966F9DDC7B34">
+								<File Id="GET_USBDEVICES.PS1" Name="Get-USBDevices.ps1" Source="ScriptRunner\Scripts\System\Get-USBDevices.ps1"/>
+							</Component>
+							<Component Id="GET_USBDEVICES.PS1.BAK" DiskId="1" Guid="00AF2C5C-F382-472B-B448-6AD745616BDB">
+								<File Id="GET_USBDEVICES.PS1.BAK" Name="Get-USBDevices.ps1.bak" Source="ScriptRunner\Scripts\System\Get-USBDevices.ps1.bak"/>
+							</Component>
+							<Component Id="GETCOMPUTERCERT.PS1" DiskId="1" Guid="A471D57D-AB02-4270-89A2-C84576AAA883">
+								<File Id="GETCOMPUTERCERT.PS1" Name="GetComputerCert.ps1" Source="ScriptRunner\Scripts\System\GetComputerCert.ps1"/>
+							</Component>
+							<Component Id="GPUPDATE.PS1" DiskId="1" Guid="B5933B7A-3329-4B07-9826-FE6F5126C27A">
+								<File Id="GPUPDATE.PS1" Name="GPUpdate.ps1" Source="ScriptRunner\Scripts\System\GPUpdate.ps1"/>
+							</Component>
+							<Component Id="LOCATION_SERVICE_REFRESH.PS1" DiskId="1" Guid="6A818046-3A73-448C-A741-93094015067A">
+								<File Id="LOCATION_SERVICE_REFRESH.PS1" Name="Location Service Refresh.ps1" Source="ScriptRunner\Scripts\System\Location Service Refresh.ps1"/>
+							</Component>
+							<Component Id="LOGOFF_ALL_USERS.PS1" DiskId="1" Guid="DE6CFB99-A249-4D10-B4F7-344513B99D36">
+								<File Id="LOGOFF_ALL_USERS.PS1" Name="Logoff All Users.ps1" Source="ScriptRunner\Scripts\System\Logoff All Users.ps1"/>
+							</Component>
+							<Component Id="RESTART_ENFORCED.PS1" DiskId="1" Guid="ABCA2050-A48A-4E58-897E-59AF1EEFE730">
+								<File Id="RESTART_ENFORCED.PS1" Name="Restart enforced.ps1" Source="ScriptRunner\Scripts\System\Restart enforced.ps1"/>
+							</Component>
+							<Component Id="SET_WORKINGHOURS.PS1" DiskId="1" Guid="6BD3BA20-3151-4DC2-9042-AAF4D445A1CE">
+								<File Id="SET_WORKINGHOURS.PS1" Name="SET-WorkingHours.ps1" Source="ScriptRunner\Scripts\System\SET-WorkingHours.ps1"/>
+							</Component>
+							<Component Id="WINDOWSUPDATE_AND_DELIVERYOPTIMIZATION_SETTINGS.PS1" DiskId="1" Guid="A699FC7B-3A72-4FB7-A0F1-43BB9F0E1EE4">
+								<File Id="WINDOWSUPDATE_AND_DELIVERYOPTIMIZATION_SETTINGS.PS1" Name="WindowsUpdate and DeliveryOptimization settings.ps1" Source="ScriptRunner\Scripts\System\WindowsUpdate and DeliveryOptimization settings.ps1"/>
+							</Component>
+							<Directory Id="DOMAIN_1" Name="Domain">
+								<Component Id="GET_AD_SITE.PS1_1" DiskId="1" Guid="FAF0D131-97F7-4B38-9F4A-BA2AA4243AC4">
+									<File Id="GET_AD_SITE.PS1_1" Name="Get AD Site.ps1" Source="ScriptRunner\Scripts\System\Domain\Get AD Site.ps1"/>
+								</Component>
+							</Directory>
+							<Directory Id="NETWORK_1" Name="Network">
+								<Component Id="FIX_BRANCHCACHE.PS1_1" DiskId="1" Guid="F45DFE50-741C-4EFD-B383-9A8BBAA35E21">
+									<File Id="FIX_BRANCHCACHE.PS1_1" Name="FIX-BranchCache.ps1" Source="ScriptRunner\Scripts\System\Network\FIX-BranchCache.ps1"/>
+								</Component>
+								<Component Id="FIX_REMOTECOMISSUES.PS1_1" DiskId="1" Guid="B9FD0381-5B63-44BB-A277-91A1FD3CDC19">
+									<File Id="FIX_REMOTECOMISSUES.PS1_1" Name="Fix-remoteComIssues.ps1" Source="ScriptRunner\Scripts\System\Network\Fix-remoteComIssues.ps1"/>
+								</Component>
+								<Component Id="FIX_STUCKBITSJOBS.PS1_1" DiskId="1" Guid="1C738C1C-A49D-417D-985F-7324A8119881">
+									<File Id="FIX_STUCKBITSJOBS.PS1_1" Name="FIX-StuckBITSJobs.ps1" Source="ScriptRunner\Scripts\System\Network\FIX-StuckBITSJobs.ps1"/>
+								</Component>
+								<Component Id="FIX_WMI.PS1_1" DiskId="1" Guid="FD5DA3BD-B7DD-409E-A9BA-364BF8048679">
+									<File Id="FIX_WMI.PS1_1" Name="FIX-WMI.ps1" Source="ScriptRunner\Scripts\System\Network\FIX-WMI.ps1"/>
+								</Component>
+								<Component Id="GET_IP.PS1_1" DiskId="1" Guid="63AB1192-F972-4BD1-83B7-97D0E42246DC">
+									<File Id="GET_IP.PS1_1" Name="Get IP.ps1" Source="ScriptRunner\Scripts\System\Network\Get IP.ps1"/>
+								</Component>
+								<Component Id="GET_SWITCHINFO.PS1_1" DiskId="1" Guid="356FDA9E-BFC7-429F-8636-97204E8BAC07">
+									<File Id="GET_SWITCHINFO.PS1_1" Name="get-switchinfo.ps1" Source="ScriptRunner\Scripts\System\Network\get-switchinfo.ps1"/>
+								</Component>
+								<Component Id="GETSWITCHINFO.PS1_1" DiskId="1" Guid="C92FAC23-BF29-4062-8675-D7314D9C7A91">
+									<File Id="GETSWITCHINFO.PS1_1" Name="GetSwitchInfo.ps1" Source="ScriptRunner\Scripts\System\Network\GetSwitchInfo.ps1"/>
+								</Component>
+								<Component Id="WOL_ENABLE.PS1_1" DiskId="1" Guid="0181F23F-25DE-4B7C-B4A8-F96225DC370B">
+									<File Id="WOL_ENABLE.PS1_1" Name="WOL-Enable.ps1" Source="ScriptRunner\Scripts\System\Network\WOL-Enable.ps1"/>
+								</Component>
+							</Directory>
+							<Directory Id="SCCM_1" Name="SCCM">
+								<Component Id="_0_SCCM_TOTALREPAIR.PS1_1" DiskId="1" Guid="C0BAC03B-C858-4E34-B7F9-B40A30CDD001">
+									<File Id="_0_SCCM_TOTALREPAIR.PS1_1" Name="0_SCCM-TotalRepair.ps1" Source="ScriptRunner\Scripts\System\SCCM\0_SCCM-TotalRepair.ps1"/>
+								</Component>
+								<Component Id="_1_EVALUATE_APPLICATION_DEPLOYMENT.PS1_1" DiskId="1" Guid="E64C191A-73F4-491C-84E4-32CEBB7CC54C">
+									<File Id="_1_EVALUATE_APPLICATION_DEPLOYMENT.PS1_1" Name="1_Evaluate application deployment.ps1" Source="ScriptRunner\Scripts\System\SCCM\1_Evaluate application deployment.ps1"/>
+								</Component>
+								<Component Id="_1_EVALUATE_MACHINE_POLICY.PS1_1" DiskId="1" Guid="D1CEE272-EB92-416F-89C6-D3D00A90B0AC">
+									<File Id="_1_EVALUATE_MACHINE_POLICY.PS1_1" Name="1_Evaluate machine policy.ps1" Source="ScriptRunner\Scripts\System\SCCM\1_Evaluate machine policy.ps1"/>
+								</Component>
+								<Component Id="_1_RUN_HEALTHTASK.PS1_1" DiskId="1" Guid="6FD3441C-004C-4D9B-A64F-9F422B812B43">
+									<File Id="_1_RUN_HEALTHTASK.PS1_1" Name="1_RUN-HealthTask.ps1" Source="ScriptRunner\Scripts\System\SCCM\1_RUN-HealthTask.ps1"/>
+								</Component>
+								<Component Id="_1_UPDATE_SCAN_AND_EVAL.PS1_1" DiskId="1" Guid="C7BCE2D1-04C0-43DB-B27F-E983BECA5C45">
+									<File Id="_1_UPDATE_SCAN_AND_EVAL.PS1_1" Name="1_Update Scan and Eval.ps1" Source="ScriptRunner\Scripts\System\SCCM\1_Update Scan and Eval.ps1"/>
+								</Component>
+								<Component Id="_8PM_RESTART_ENFORCED.PS1_1" DiskId="1" Guid="08B17024-067B-4768-BDCA-6C588E670644">
+									<File Id="_8PM_RESTART_ENFORCED.PS1_1" Name="8pm Restart enforced.ps1" Source="ScriptRunner\Scripts\System\SCCM\8pm Restart enforced.ps1"/>
+								</Component>
+								<Component Id="CANPROGRAMRUNNOW.PS1_1" DiskId="1" Guid="437FFC0F-C694-46CE-B594-CC56B155978A">
+									<File Id="CANPROGRAMRUNNOW.PS1_1" Name="CanProgramRunNow.ps1" Source="ScriptRunner\Scripts\System\SCCM\CanProgramRunNow.ps1"/>
+								</Component>
+								<Component Id="CANUPDATERUNNOW.PS1_1" DiskId="1" Guid="6B8F8A64-E4E9-4773-9B8D-48A54DE25F20">
+									<File Id="CANUPDATERUNNOW.PS1_1" Name="CanUpdateRunNow.ps1" Source="ScriptRunner\Scripts\System\SCCM\CanUpdateRunNow.ps1"/>
+								</Component>
+								<Component Id="COUNT_MISSING_UPDATES.PS1_1" DiskId="1" Guid="EF7A0E5F-AF36-411E-BF07-3AFC95A7967E">
+									<File Id="COUNT_MISSING_UPDATES.PS1_1" Name="Count missing updates.ps1" Source="ScriptRunner\Scripts\System\SCCM\Count missing updates.ps1"/>
+								</Component>
+								<Component Id="GET_WSUSCONTENTINFO.PS1_1" DiskId="1" Guid="1ACB38E5-0A92-47C5-B4CA-70D708A37B88">
+									<File Id="GET_WSUSCONTENTINFO.PS1_1" Name="GET-WSUScontentInfo.ps1" Source="ScriptRunner\Scripts\System\SCCM\GET-WSUScontentInfo.ps1"/>
+								</Component>
+								<Component Id="INSTALL_ALL_MANDATORY_UPDATES.PS1_1" DiskId="1" Guid="7291B100-B78C-4F79-A971-ADF586DF0E84">
+									<File Id="INSTALL_ALL_MANDATORY_UPDATES.PS1_1" Name="Install all mandatory updates.ps1" Source="ScriptRunner\Scripts\System\SCCM\Install all mandatory updates.ps1"/>
+								</Component>
+								<Component Id="NOTIFY_USEROFREBOOT.PS1_1" DiskId="1" Guid="D0BB5A73-AB6C-4DA7-B74A-E4B08520AE41">
+									<File Id="NOTIFY_USEROFREBOOT.PS1_1" Name="Notify-UserOfReboot.ps1" Source="ScriptRunner\Scripts\System\SCCM\Notify-UserOfReboot.ps1"/>
+								</Component>
+								<Component Id="NOTIFY_USEROFUPDATES.PS1_1" DiskId="1" Guid="5DE3B054-34A7-4346-AE03-036F058475CA">
+									<File Id="NOTIFY_USEROFUPDATES.PS1_1" Name="Notify-UserOfUpdates.ps1" Source="ScriptRunner\Scripts\System\SCCM\Notify-UserOfUpdates.ps1"/>
+								</Component>
+								<Component Id="RESTARTCCMEXEC.PS1_1" DiskId="1" Guid="9E8C11C8-36A6-4FA7-B908-69B348B3B531">
+									<File Id="RESTARTCCMEXEC.PS1_1" Name="RestartCCMEXEC.ps1" Source="ScriptRunner\Scripts\System\SCCM\RestartCCMEXEC.ps1"/>
+								</Component>
+								<Component Id="RESTARTCCMSETUP.PS1_1" DiskId="1" Guid="AFE384E8-58D9-4D2F-B32F-AC9DE4D7626B">
+									<File Id="RESTARTCCMSETUP.PS1_1" Name="RestartCCMSetUP.ps1" Source="ScriptRunner\Scripts\System\SCCM\RestartCCMSetUP.ps1"/>
+								</Component>
+								<Component Id="RUN_HEALTHTASK.PS1_1" DiskId="1" Guid="0031C23D-5A05-4D70-9B42-A0F0183498B5">
+									<File Id="RUN_HEALTHTASK.PS1_1" Name="RUN-HealthTask.ps1" Source="ScriptRunner\Scripts\System\SCCM\RUN-HealthTask.ps1"/>
+								</Component>
+								<Component Id="SCCM_AUTOUPDATECLIENT.PS1_1" DiskId="1" Guid="F3678E4D-8628-43B8-B479-484B0DDA9B5F">
+									<File Id="SCCM_AUTOUPDATECLIENT.PS1_1" Name="SCCM-AutoUpdateClient.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-AutoUpdateClient.ps1"/>
+								</Component>
+								<Component Id="SCCM_CANCELPENDINGREBOOT.PS1_1" DiskId="1" Guid="70C01134-A35E-4EA4-9742-B1A19A3E698A">
+									<File Id="SCCM_CANCELPENDINGREBOOT.PS1_1" Name="SCCM-CANCELPendingReboot.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-CANCELPendingReboot.ps1"/>
+								</Component>
+								<Component Id="SCCM_CERTCHECK.PS1_1" DiskId="1" Guid="C8B1B427-941F-479F-8B4C-953D386B9D72">
+									<File Id="SCCM_CERTCHECK.PS1_1" Name="SCCM-CertCheck.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-CertCheck.ps1"/>
+								</Component>
+								<Component Id="SCCM_CHANGEFORCEDREBOOT2NON_FORCED.PS1_1" DiskId="1" Guid="17E94B78-04E1-4593-8776-86A7D121FF7A">
+									<File Id="SCCM_CHANGEFORCEDREBOOT2NON_FORCED.PS1_1" Name="SCCM-ChangeForcedReboot2Non-forced.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-ChangeForcedReboot2Non-forced.ps1"/>
+								</Component>
+								<Component Id="SCCM_DP_LEDBATCHECKANDFIX.PS1_1" DiskId="1" Guid="18F71DEB-DB62-4421-B651-EB5AEE866EE8">
+									<File Id="SCCM_DP_LEDBATCHECKANDFIX.PS1_1" Name="SCCM-DP-LEDBATCheckAndFIX.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-DP-LEDBATCheckAndFIX.ps1"/>
+								</Component>
+								<Component Id="SCCM_FORCE_INSTALL_OF_SOFTWARE_UPDATES.PS1_1" DiskId="1" Guid="9C07A1BA-1BEC-4B98-865B-1CA7A6966D29">
+									<File Id="SCCM_FORCE_INSTALL_OF_SOFTWARE_UPDATES.PS1_1" Name="SCCM-force-install-of-software-updates.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-force-install-of-software-updates.ps1"/>
+								</Component>
+								<Component Id="SCCM_REBOOTWITHTIMER.PS1_1" DiskId="1" Guid="40BEC338-78D7-4489-9C46-10ADEEDFC5EE">
+									<File Id="SCCM_REBOOTWITHTIMER.PS1_1" Name="SCCM-RebootWithTimer.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-RebootWithTimer.ps1"/>
+								</Component>
+								<Component Id="SCCM_REPAIR.PS1_1" DiskId="1" Guid="3B2E047F-18BA-4B6E-AC26-4E2E4FF087DF">
+									<File Id="SCCM_REPAIR.PS1_1" Name="SCCM-Repair.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-Repair.ps1"/>
+								</Component>
+								<Component Id="SCCM_RESET_GUID.PS1_1" DiskId="1" Guid="1B0DA2AD-9EAC-4CD3-9967-FC5863FF2C38">
+									<File Id="SCCM_RESET_GUID.PS1_1" Name="SCCM-Reset GUID.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-Reset GUID.ps1"/>
+								</Component>
+								<Component Id="SCCM_RESETINVENTORY.PS1_1" DiskId="1" Guid="A8A04E0C-C5E4-439C-9231-7C37F0EB5B32">
+									<File Id="SCCM_RESETINVENTORY.PS1_1" Name="SCCM-ResetInventory.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-ResetInventory.ps1"/>
+								</Component>
+								<Component Id="SCCM_RESETREBOOTCOUNTDOWN.PS1_1" DiskId="1" Guid="F3BE8B80-A8CA-4D1E-B3CC-1DD835C6CE97">
+									<File Id="SCCM_RESETREBOOTCOUNTDOWN.PS1_1" Name="SCCM-ResetRebootCountdown.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-ResetRebootCountdown.ps1"/>
+								</Component>
+								<Component Id="SCCM_RETRYTASK.PS1_1" DiskId="1" Guid="CD3A2A6C-47BF-4A87-90CE-AC05772AD610">
+									<File Id="SCCM_RETRYTASK.PS1_1" Name="SCCM-RetryTASK.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-RetryTASK.ps1"/>
+								</Component>
+								<Component Id="SCCM_RUNDPCONTENTVALDATIONNOW.PS1_1" DiskId="1" Guid="8BAFB570-FE51-4629-B85D-82FD810AD2B4">
+									<File Id="SCCM_RUNDPCONTENTVALDATIONNOW.PS1_1" Name="SCCM-RunDPContentValdationNOW.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-RunDPContentValdationNOW.ps1"/>
+								</Component>
+								<Component Id="SCCM_SHOWNUMBEROFUPDATESANDRUN.PS1_1" DiskId="1" Guid="DE4FDCEE-AB15-46FC-93B0-4F0BEF81C399">
+									<File Id="SCCM_SHOWNUMBEROFUPDATESANDRUN.PS1_1" Name="SCCM-ShowNumberOfUpdatesAndRun.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-ShowNumberOfUpdatesAndRun.ps1"/>
+								</Component>
+								<Component Id="SCCM_UNINSTALL_REINSTALL.PS1_1" DiskId="1" Guid="7A061EC4-9F15-45E3-A40F-20E7B1CF2687">
+									<File Id="SCCM_UNINSTALL_REINSTALL.PS1_1" Name="SCCM-UNINSTALL-REINSTALL.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-UNINSTALL-REINSTALL.ps1"/>
+								</Component>
+								<Component Id="SCCM_UPATESCAN.PS1_1" DiskId="1" Guid="9E9526DA-F068-48DD-A22E-8D61E415450F">
+									<File Id="SCCM_UPATESCAN.PS1_1" Name="SCCM-UpateScan.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-UpateScan.ps1"/>
+								</Component>
+								<Component Id="SCCM_UPDATETASK.PS1_1" DiskId="1" Guid="734B8FFE-6036-4105-B9E7-B8CB7E2FE910">
+									<File Id="SCCM_UPDATETASK.PS1_1" Name="SCCM-UpdateTASK.ps1" Source="ScriptRunner\Scripts\System\SCCM\SCCM-UpdateTASK.ps1"/>
+								</Component>
+								<Component Id="SUREFIXSCCMCLIENT.PS1_1" DiskId="1" Guid="A0C8AD76-289A-4AD9-9CAA-00D0AF9BE6F0">
+									<File Id="SUREFIXSCCMCLIENT.PS1_1" Name="SureFixSccmClient.ps1" Source="ScriptRunner\Scripts\System\SCCM\SureFixSccmClient.ps1"/>
+								</Component>
+								<Component Id="WSUS_SERVICECHECK.PS1_1" DiskId="1" Guid="42BB7F28-235E-4496-B3A1-B64B168BFF45">
+									<File Id="WSUS_SERVICECHECK.PS1_1" Name="WSUS-ServiceCheck.ps1" Source="ScriptRunner\Scripts\System\SCCM\WSUS-ServiceCheck.ps1"/>
+								</Component>
+							</Directory>
+							<Directory Id="SYSTEM_1" Name="System">
+								<Component Id="CERTCHECK_PKI.PS1_1" DiskId="1" Guid="EA62EF17-F615-4A8E-9C3B-2C8A616CF94E">
+									<File Id="CERTCHECK_PKI.PS1_1" Name="CertCheck-PKI.ps1" Source="ScriptRunner\Scripts\System\System\CertCheck-PKI.ps1"/>
+								</Component>
+								<Component Id="CERTCHECK.PS1_1" DiskId="1" Guid="3856B90E-139A-4B0E-98EB-4D1449950BDE">
+									<File Id="CERTCHECK.PS1_1" Name="CertCheck.ps1" Source="ScriptRunner\Scripts\System\System\CertCheck.ps1"/>
+								</Component>
+								<Component Id="CHK_IF_VM.PS1_1" DiskId="1" Guid="3A663C40-A972-4CAA-90E8-6F0D0D85FBEC">
+									<File Id="CHK_IF_VM.PS1_1" Name="CHK-if VM.ps1" Source="ScriptRunner\Scripts\System\System\CHK-if VM.ps1"/>
+								</Component>
+								<Component Id="CHK_PCNAMEVSSN.PS1_1" DiskId="1" Guid="23D1F03F-1F8A-4F5C-AF3E-CE7834DB1ECE">
+									<File Id="CHK_PCNAMEVSSN.PS1_1" Name="CHK-PCnameVSSN.ps1" Source="ScriptRunner\Scripts\System\System\CHK-PCnameVSSN.ps1"/>
+								</Component>
+								<Component Id="DEL_ALLUSERTEMP.PS1_1" DiskId="1" Guid="4DA4A71A-EE90-4CBD-81E9-0C93503041A8">
+									<File Id="DEL_ALLUSERTEMP.PS1_1" Name="DEL-AllUserTemp.ps1" Source="ScriptRunner\Scripts\System\System\DEL-AllUserTemp.ps1"/>
+								</Component>
+								<Component Id="DEL_LOCAL_EXPIRED_CERTSV2.PS1_1" DiskId="1" Guid="7294D2E8-B89A-453B-AD6E-4DCBEE3B4218">
+									<File Id="DEL_LOCAL_EXPIRED_CERTSV2.PS1_1" Name="DEL_local_expired_Certsv2.ps1" Source="ScriptRunner\Scripts\System\System\DEL_local_expired_Certsv2.ps1"/>
+								</Component>
+								<Component Id="FILE_CHECK_SFD.PS1_1" DiskId="1" Guid="3EE8E51C-63E7-4A2A-B482-C9F85FB1B7D3">
+									<File Id="FILE_CHECK_SFD.PS1_1" Name="FILE Check-SFD.ps1" Source="ScriptRunner\Scripts\System\System\FILE Check-SFD.ps1"/>
+								</Component>
+								<Component Id="FIX_TEMPORARYPROFILE.PS1_1" DiskId="1" Guid="6D884F32-B426-4CC4-95F6-AF648D453388">
+									<File Id="FIX_TEMPORARYPROFILE.PS1_1" Name="Fix-TemporaryProfile.ps1" Source="ScriptRunner\Scripts\System\System\Fix-TemporaryProfile.ps1"/>
+								</Component>
+								<Component Id="FIX_WINDOWSUPDATE.PS1_1" DiskId="1" Guid="F5F33D94-B1C9-453B-8BFA-5EFD2AE050C2">
+									<File Id="FIX_WINDOWSUPDATE.PS1_1" Name="FIX-WindowsUpdate.ps1" Source="ScriptRunner\Scripts\System\System\FIX-WindowsUpdate.ps1"/>
+								</Component>
+								<Component Id="FIX_WUAANDMWERROS.PS1_1" DiskId="1" Guid="A45CC8B9-5561-4C1C-9B35-5ACD92DB5377">
+									<File Id="FIX_WUAANDMWERROS.PS1_1" Name="FIX-WUAandMWerros.ps1" Source="ScriptRunner\Scripts\System\System\FIX-WUAandMWerros.ps1"/>
+								</Component>
+								<Component Id="FIXALLCORRUPTION1STSTEP.PS1_1" DiskId="1" Guid="35E59A36-EA9D-42CD-AE19-F764401B5B0F">
+									<File Id="FIXALLCORRUPTION1STSTEP.PS1_1" Name="FixAllCorruption1stStep.ps1" Source="ScriptRunner\Scripts\System\System\FixAllCorruption1stStep.ps1"/>
+								</Component>
+								<Component Id="FREE_DISK_SPACE.PS1_1" DiskId="1" Guid="36FF9472-895B-4CFA-BEFC-32D6B7B424DF">
+									<File Id="FREE_DISK_SPACE.PS1_1" Name="Free disk space.ps1" Source="ScriptRunner\Scripts\System\System\Free disk space.ps1"/>
+								</Component>
+								<Component Id="GENERATE_WINDOWSUPDATELOG.PS1_1" DiskId="1" Guid="D116D417-4509-4824-96C5-928A0C75F1F9">
+									<File Id="GENERATE_WINDOWSUPDATELOG.PS1_1" Name="Generate_WindowsUpdateLog.ps1" Source="ScriptRunner\Scripts\System\System\Generate_WindowsUpdateLog.ps1"/>
+								</Component>
+								<Component Id="GET_LAST_INSTALLED_UPDATES.PS1_1" DiskId="1" Guid="D2963D69-A2B0-4D2B-AF60-A0ECF037399A">
+									<File Id="GET_LAST_INSTALLED_UPDATES.PS1_1" Name="Get last installed updates.ps1" Source="ScriptRunner\Scripts\System\System\Get last installed updates.ps1"/>
+								</Component>
+								<Component Id="GET_LOGGED_ON_USER.PS1_1" DiskId="1" Guid="47C1A220-052E-4FAC-B16C-61308D454C23">
+									<File Id="GET_LOGGED_ON_USER.PS1_1" Name="Get logged on user.ps1" Source="ScriptRunner\Scripts\System\System\Get logged on user.ps1"/>
+								</Component>
+								<Component Id="GET_MODEL.PS1_1" DiskId="1" Guid="E8A289B4-4FB4-4E51-B9CF-3668D1FAB076">
+									<File Id="GET_MODEL.PS1_1" Name="Get Model.ps1" Source="ScriptRunner\Scripts\System\System\Get Model.ps1"/>
+								</Component>
+								<Component Id="GET_OS_VERSION.PS1_1" DiskId="1" Guid="DF14B129-A482-4869-8816-240106FC6F72">
+									<File Id="GET_OS_VERSION.PS1_1" Name="Get OS Version.ps1" Source="ScriptRunner\Scripts\System\System\Get OS Version.ps1"/>
+								</Component>
+								<Component Id="GET_POWERSHELL_VERSION.PS1_1" DiskId="1" Guid="0ABD55EA-317C-40CB-96BE-5099D1D7B314">
+									<File Id="GET_POWERSHELL_VERSION.PS1_1" Name="Get PowerShell Version.ps1" Source="ScriptRunner\Scripts\System\System\Get PowerShell Version.ps1"/>
+								</Component>
+								<Component Id="GET_USER_DIR_SIZE.PS1_1" DiskId="1" Guid="8064AB7B-4D43-4802-876A-A474AB1595DC">
+									<File Id="GET_USER_DIR_SIZE.PS1_1" Name="Get User DIR Size.ps1" Source="ScriptRunner\Scripts\System\System\Get User DIR Size.ps1"/>
+								</Component>
+								<Component Id="GET_BATTERYSTATS.PS1_1" DiskId="1" Guid="25098F82-CB12-4673-BFF9-15E026A2E140">
+									<File Id="GET_BATTERYSTATS.PS1_1" Name="Get-BatteryStats.ps1" Source="ScriptRunner\Scripts\System\System\Get-BatteryStats.ps1"/>
+								</Component>
+								<Component Id="GET_COMPUTERDRIVERS.PS1_1" DiskId="1" Guid="9407EED6-662B-4018-8EE8-A9882E0BB08A">
+									<File Id="GET_COMPUTERDRIVERS.PS1_1" Name="Get-ComputerDrivers.ps1" Source="ScriptRunner\Scripts\System\System\Get-ComputerDrivers.ps1"/>
+								</Component>
+								<Component Id="GET_COMPUTERDRIVERS.PS1.BAK_1" DiskId="1" Guid="66883F5F-1643-4611-9F80-00A648CBC8BE">
+									<File Id="GET_COMPUTERDRIVERS.PS1.BAK_1" Name="Get-ComputerDrivers.ps1.bak" Source="ScriptRunner\Scripts\System\System\Get-ComputerDrivers.ps1.bak"/>
+								</Component>
+								<Component Id="GET_LASTREBOOT.PS1_1" DiskId="1" Guid="1C643F5E-B5CE-49FB-A05C-E2F5F46436AA">
+									<File Id="GET_LASTREBOOT.PS1_1" Name="Get-LastReboot.ps1" Source="ScriptRunner\Scripts\System\System\Get-LastReboot.ps1"/>
+								</Component>
+								<Component Id="GET_PENDINGREBOOT.PS1_1" DiskId="1" Guid="4C135157-7CCA-4A26-952E-2D760DD82868">
+									<File Id="GET_PENDINGREBOOT.PS1_1" Name="Get-PendingReboot.ps1" Source="ScriptRunner\Scripts\System\System\Get-PendingReboot.ps1"/>
+								</Component>
+								<Component Id="GET_USBDEVICES.PS1_1" DiskId="1" Guid="CA0DE574-B587-4C8E-A8D0-86BC693C1AF8">
+									<File Id="GET_USBDEVICES.PS1_1" Name="Get-USBDevices.ps1" Source="ScriptRunner\Scripts\System\System\Get-USBDevices.ps1"/>
+								</Component>
+								<Component Id="GET_USBDEVICES.PS1.BAK_1" DiskId="1" Guid="9665BC66-AC8C-4F77-B5DA-866BC677B8D2">
+									<File Id="GET_USBDEVICES.PS1.BAK_1" Name="Get-USBDevices.ps1.bak" Source="ScriptRunner\Scripts\System\System\Get-USBDevices.ps1.bak"/>
+								</Component>
+								<Component Id="GETCOMPUTERCERT.PS1_1" DiskId="1" Guid="4DCDE0E2-73C4-4E20-A18C-9EB5A10DF783">
+									<File Id="GETCOMPUTERCERT.PS1_1" Name="GetComputerCert.ps1" Source="ScriptRunner\Scripts\System\System\GetComputerCert.ps1"/>
+								</Component>
+								<Component Id="GPUPDATE.PS1_1" DiskId="1" Guid="78CFE7E5-E358-4250-9065-060C982AA3C7">
+									<File Id="GPUPDATE.PS1_1" Name="GPUpdate.ps1" Source="ScriptRunner\Scripts\System\System\GPUpdate.ps1"/>
+								</Component>
+								<Component Id="LOCATION_SERVICE_REFRESH.PS1_1" DiskId="1" Guid="EC1EA80D-81D4-4306-8031-B1A053C261FC">
+									<File Id="LOCATION_SERVICE_REFRESH.PS1_1" Name="Location Service Refresh.ps1" Source="ScriptRunner\Scripts\System\System\Location Service Refresh.ps1"/>
+								</Component>
+								<Component Id="LOGOFF_ALL_USERS.PS1_1" DiskId="1" Guid="01E87E4F-755E-41F8-8813-1BEC446193C8">
+									<File Id="LOGOFF_ALL_USERS.PS1_1" Name="Logoff All Users.ps1" Source="ScriptRunner\Scripts\System\System\Logoff All Users.ps1"/>
+								</Component>
+								<Component Id="RESTART_ENFORCED.PS1_1" DiskId="1" Guid="5B7B1FAA-2A2B-41CA-AC6B-1192A5E8C0FD">
+									<File Id="RESTART_ENFORCED.PS1_1" Name="Restart enforced.ps1" Source="ScriptRunner\Scripts\System\System\Restart enforced.ps1"/>
+								</Component>
+								<Component Id="SET_WORKINGHOURS.PS1_1" DiskId="1" Guid="8D5FBEE0-A86B-4CEB-8E61-98F260825BA9">
+									<File Id="SET_WORKINGHOURS.PS1_1" Name="SET-WorkingHours.ps1" Source="ScriptRunner\Scripts\System\System\SET-WorkingHours.ps1"/>
+								</Component>
+								<Component Id="WINDOWSUPDATE_AND_DELIVERYOPTIMIZATION_SETTINGS.PS1_1" DiskId="1" Guid="30FFBB47-638F-433A-B5B8-96235FE5742B">
+									<File Id="WINDOWSUPDATE_AND_DELIVERYOPTIMIZATION_SETTINGS.PS1_1" Name="WindowsUpdate and DeliveryOptimization settings.ps1" Source="ScriptRunner\Scripts\System\System\WindowsUpdate and DeliveryOptimization settings.ps1"/>
+								</Component>
+							</Directory>
+						</Directory>
+					</Directory>
+				</Directory>
+			</Directory>
+			<Directory Id="DesktopFolder"/>
+			<Directory Id="ProgramMenuFolder">
+				<Directory Id="ProgramDir" Name="ScriptRunner">
+					<Component Id="StartMenuShortcuts" Guid="51559236-80C9-45AD-941B-79757942809C">
+						<RemoveFolder Id="PerUserProgramDir" On="uninstall"/>
+						<RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value=""/>
+						<Shortcut Id="UninstallProduct" Name="Uninstall" Description="Uninstalls the application" Target="[System64Folder]msiexec.exe" Arguments="/x [ProductCode]"/>
+					</Component>
+				</Directory>
+			</Directory>
+		</Directory>
+		<Feature Id="DefaultFeature" Title="Main Feature" Level="1">
+			<ComponentRef Id="ICSHARPCODE.AVALONEDIT.DLL"/>
+			<ComponentRef Id="ICSHARPCODE.AVALONEDIT.XML"/>
+			<ComponentRef Id="MICROSOFT.MANAGEMENT.INFRASTRUCTURE.DLL"/>
+			<ComponentRef Id="NEWTONSOFT.JSON.DLL"/>
+			<ComponentRef Id="NEWTONSOFT.JSON.XML"/>
+			<ComponentRef Id="PROPERTYTOOLS.DLL"/>
+			<ComponentRef Id="PROPERTYTOOLS.WPF.DLL"/>
+			<ComponentRef Id="SCRIPT.APPLICATION"/>
+			<ComponentRef Id="SCRIPT.PDB"/>
+			<ComponentRef Id="SCRIPTRUNNER.EXE"/>
+			<ComponentRef Id="SCRIPTRUNNER.EXE.CONFIG"/>
+			<ComponentRef Id="SCRIPTRUNNER.EXE.MANIFEST"/>
+			<ComponentRef Id="SYSTEM.CODEDOM.DLL"/>
+			<ComponentRef Id="SYSTEM.CODEDOM.XML"/>
+			<ComponentRef Id="SYSTEM.MANAGEMENT.AUTOMATION.DLL"/>
+			<ComponentRef Id="SYSTEM.MANAGEMENT.AUTOMATION.XML"/>
+			<ComponentRef Id="ZPOWERSHELL.XSHD"/>
+			<ComponentRef Id="_4.ICO"/>
+			<ComponentRef Id="_93025861_5178_4FCD_BDF0_80690723D666.ICO"/>
+			<ComponentRef Id="_93025861_5178_4FCD_BDF0_80690723D666.PNG"/>
+			<ComponentRef Id="GREAT_SEAL_OF_THE_STATE_OF_MINNESOTA.PNG"/>
+			<ComponentRef Id="REMEDYQUERYRUNNER.1004.ICO"/>
+			<ComponentRef Id="WMIQUERIES.JSON"/>
+			<ComponentRef Id="WMIQUERIES.JSON.BAK"/>
+			<ComponentRef Id="GET_AD_SITE.PS1"/>
+			<ComponentRef Id="FIX_BRANCHCACHE.PS1"/>
+			<ComponentRef Id="FIX_REMOTECOMISSUES.PS1"/>
+			<ComponentRef Id="FIX_STUCKBITSJOBS.PS1"/>
+			<ComponentRef Id="FIX_WMI.PS1"/>
+			<ComponentRef Id="GET_IP.PS1"/>
+			<ComponentRef Id="GET_SWITCHINFO.PS1"/>
+			<ComponentRef Id="GETSWITCHINFO.PS1"/>
+			<ComponentRef Id="WOL_ENABLE.PS1"/>
+			<ComponentRef Id="_0_SCCM_TOTALREPAIR.PS1"/>
+			<ComponentRef Id="_1_EVALUATE_APPLICATION_DEPLOYMENT.PS1"/>
+			<ComponentRef Id="_1_EVALUATE_MACHINE_POLICY.PS1"/>
+			<ComponentRef Id="_1_RUN_HEALTHTASK.PS1"/>
+			<ComponentRef Id="_1_UPDATE_SCAN_AND_EVAL.PS1"/>
+			<ComponentRef Id="_8PM_RESTART_ENFORCED.PS1"/>
+			<ComponentRef Id="CANPROGRAMRUNNOW.PS1"/>
+			<ComponentRef Id="CANUPDATERUNNOW.PS1"/>
+			<ComponentRef Id="COUNT_MISSING_UPDATES.PS1"/>
+			<ComponentRef Id="GET_WSUSCONTENTINFO.PS1"/>
+			<ComponentRef Id="INSTALL_ALL_MANDATORY_UPDATES.PS1"/>
+			<ComponentRef Id="NOTIFY_USEROFREBOOT.PS1"/>
+			<ComponentRef Id="NOTIFY_USEROFUPDATES.PS1"/>
+			<ComponentRef Id="RESTARTCCMEXEC.PS1"/>
+			<ComponentRef Id="RESTARTCCMSETUP.PS1"/>
+			<ComponentRef Id="RUN_HEALTHTASK.PS1"/>
+			<ComponentRef Id="SCCM_AUTOUPDATECLIENT.PS1"/>
+			<ComponentRef Id="SCCM_CANCELPENDINGREBOOT.PS1"/>
+			<ComponentRef Id="SCCM_CERTCHECK.PS1"/>
+			<ComponentRef Id="SCCM_CHANGEFORCEDREBOOT2NON_FORCED.PS1"/>
+			<ComponentRef Id="SCCM_DP_LEDBATCHECKANDFIX.PS1"/>
+			<ComponentRef Id="SCCM_FORCE_INSTALL_OF_SOFTWARE_UPDATES.PS1"/>
+			<ComponentRef Id="SCCM_REBOOTWITHTIMER.PS1"/>
+			<ComponentRef Id="SCCM_REPAIR.PS1"/>
+			<ComponentRef Id="SCCM_RESET_GUID.PS1"/>
+			<ComponentRef Id="SCCM_RESETINVENTORY.PS1"/>
+			<ComponentRef Id="SCCM_RESETREBOOTCOUNTDOWN.PS1"/>
+			<ComponentRef Id="SCCM_RETRYTASK.PS1"/>
+			<ComponentRef Id="SCCM_RUNDPCONTENTVALDATIONNOW.PS1"/>
+			<ComponentRef Id="SCCM_SHOWNUMBEROFUPDATESANDRUN.PS1"/>
+			<ComponentRef Id="SCCM_UNINSTALL_REINSTALL.PS1"/>
+			<ComponentRef Id="SCCM_UPATESCAN.PS1"/>
+			<ComponentRef Id="SCCM_UPDATETASK.PS1"/>
+			<ComponentRef Id="SUREFIXSCCMCLIENT.PS1"/>
+			<ComponentRef Id="WSUS_SERVICECHECK.PS1"/>
+			<ComponentRef Id="CERTCHECK_PKI.PS1"/>
+			<ComponentRef Id="CERTCHECK.PS1"/>
+			<ComponentRef Id="CHK_IF_VM.PS1"/>
+			<ComponentRef Id="CHK_PCNAMEVSSN.PS1"/>
+			<ComponentRef Id="DEL_ALLUSERTEMP.PS1"/>
+			<ComponentRef Id="DEL_LOCAL_EXPIRED_CERTSV2.PS1"/>
+			<ComponentRef Id="FILE_CHECK_SFD.PS1"/>
+			<ComponentRef Id="FIX_TEMPORARYPROFILE.PS1"/>
+			<ComponentRef Id="FIX_WINDOWSUPDATE.PS1"/>
+			<ComponentRef Id="FIX_WUAANDMWERROS.PS1"/>
+			<ComponentRef Id="FIXALLCORRUPTION1STSTEP.PS1"/>
+			<ComponentRef Id="FREE_DISK_SPACE.PS1"/>
+			<ComponentRef Id="GENERATE_WINDOWSUPDATELOG.PS1"/>
+			<ComponentRef Id="GET_LAST_INSTALLED_UPDATES.PS1"/>
+			<ComponentRef Id="GET_LOGGED_ON_USER.PS1"/>
+			<ComponentRef Id="GET_MODEL.PS1"/>
+			<ComponentRef Id="GET_OS_VERSION.PS1"/>
+			<ComponentRef Id="GET_POWERSHELL_VERSION.PS1"/>
+			<ComponentRef Id="GET_USER_DIR_SIZE.PS1"/>
+			<ComponentRef Id="GET_BATTERYSTATS.PS1"/>
+			<ComponentRef Id="GET_COMPUTERDRIVERS.PS1"/>
+			<ComponentRef Id="GET_COMPUTERDRIVERS.PS1.BAK"/>
+			<ComponentRef Id="GET_LASTREBOOT.PS1"/>
+			<ComponentRef Id="GET_PENDINGREBOOT.PS1"/>
+			<ComponentRef Id="GET_USBDEVICES.PS1"/>
+			<ComponentRef Id="GET_USBDEVICES.PS1.BAK"/>
+			<ComponentRef Id="GETCOMPUTERCERT.PS1"/>
+			<ComponentRef Id="GPUPDATE.PS1"/>
+			<ComponentRef Id="LOCATION_SERVICE_REFRESH.PS1"/>
+			<ComponentRef Id="LOGOFF_ALL_USERS.PS1"/>
+			<ComponentRef Id="RESTART_ENFORCED.PS1"/>
+			<ComponentRef Id="SET_WORKINGHOURS.PS1"/>
+			<ComponentRef Id="WINDOWSUPDATE_AND_DELIVERYOPTIMIZATION_SETTINGS.PS1"/>
+			<ComponentRef Id="GET_AD_SITE.PS1_1"/>
+			<ComponentRef Id="FIX_BRANCHCACHE.PS1_1"/>
+			<ComponentRef Id="FIX_REMOTECOMISSUES.PS1_1"/>
+			<ComponentRef Id="FIX_STUCKBITSJOBS.PS1_1"/>
+			<ComponentRef Id="FIX_WMI.PS1_1"/>
+			<ComponentRef Id="GET_IP.PS1_1"/>
+			<ComponentRef Id="GET_SWITCHINFO.PS1_1"/>
+			<ComponentRef Id="GETSWITCHINFO.PS1_1"/>
+			<ComponentRef Id="WOL_ENABLE.PS1_1"/>
+			<ComponentRef Id="_0_SCCM_TOTALREPAIR.PS1_1"/>
+			<ComponentRef Id="_1_EVALUATE_APPLICATION_DEPLOYMENT.PS1_1"/>
+			<ComponentRef Id="_1_EVALUATE_MACHINE_POLICY.PS1_1"/>
+			<ComponentRef Id="_1_RUN_HEALTHTASK.PS1_1"/>
+			<ComponentRef Id="_1_UPDATE_SCAN_AND_EVAL.PS1_1"/>
+			<ComponentRef Id="_8PM_RESTART_ENFORCED.PS1_1"/>
+			<ComponentRef Id="CANPROGRAMRUNNOW.PS1_1"/>
+			<ComponentRef Id="CANUPDATERUNNOW.PS1_1"/>
+			<ComponentRef Id="COUNT_MISSING_UPDATES.PS1_1"/>
+			<ComponentRef Id="GET_WSUSCONTENTINFO.PS1_1"/>
+			<ComponentRef Id="INSTALL_ALL_MANDATORY_UPDATES.PS1_1"/>
+			<ComponentRef Id="NOTIFY_USEROFREBOOT.PS1_1"/>
+			<ComponentRef Id="NOTIFY_USEROFUPDATES.PS1_1"/>
+			<ComponentRef Id="RESTARTCCMEXEC.PS1_1"/>
+			<ComponentRef Id="RESTARTCCMSETUP.PS1_1"/>
+			<ComponentRef Id="RUN_HEALTHTASK.PS1_1"/>
+			<ComponentRef Id="SCCM_AUTOUPDATECLIENT.PS1_1"/>
+			<ComponentRef Id="SCCM_CANCELPENDINGREBOOT.PS1_1"/>
+			<ComponentRef Id="SCCM_CERTCHECK.PS1_1"/>
+			<ComponentRef Id="SCCM_CHANGEFORCEDREBOOT2NON_FORCED.PS1_1"/>
+			<ComponentRef Id="SCCM_DP_LEDBATCHECKANDFIX.PS1_1"/>
+			<ComponentRef Id="SCCM_FORCE_INSTALL_OF_SOFTWARE_UPDATES.PS1_1"/>
+			<ComponentRef Id="SCCM_REBOOTWITHTIMER.PS1_1"/>
+			<ComponentRef Id="SCCM_REPAIR.PS1_1"/>
+			<ComponentRef Id="SCCM_RESET_GUID.PS1_1"/>
+			<ComponentRef Id="SCCM_RESETINVENTORY.PS1_1"/>
+			<ComponentRef Id="SCCM_RESETREBOOTCOUNTDOWN.PS1_1"/>
+			<ComponentRef Id="SCCM_RETRYTASK.PS1_1"/>
+			<ComponentRef Id="SCCM_RUNDPCONTENTVALDATIONNOW.PS1_1"/>
+			<ComponentRef Id="SCCM_SHOWNUMBEROFUPDATESANDRUN.PS1_1"/>
+			<ComponentRef Id="SCCM_UNINSTALL_REINSTALL.PS1_1"/>
+			<ComponentRef Id="SCCM_UPATESCAN.PS1_1"/>
+			<ComponentRef Id="SCCM_UPDATETASK.PS1_1"/>
+			<ComponentRef Id="SUREFIXSCCMCLIENT.PS1_1"/>
+			<ComponentRef Id="WSUS_SERVICECHECK.PS1_1"/>
+			<ComponentRef Id="CERTCHECK_PKI.PS1_1"/>
+			<ComponentRef Id="CERTCHECK.PS1_1"/>
+			<ComponentRef Id="CHK_IF_VM.PS1_1"/>
+			<ComponentRef Id="CHK_PCNAMEVSSN.PS1_1"/>
+			<ComponentRef Id="DEL_ALLUSERTEMP.PS1_1"/>
+			<ComponentRef Id="DEL_LOCAL_EXPIRED_CERTSV2.PS1_1"/>
+			<ComponentRef Id="FILE_CHECK_SFD.PS1_1"/>
+			<ComponentRef Id="FIX_TEMPORARYPROFILE.PS1_1"/>
+			<ComponentRef Id="FIX_WINDOWSUPDATE.PS1_1"/>
+			<ComponentRef Id="FIX_WUAANDMWERROS.PS1_1"/>
+			<ComponentRef Id="FIXALLCORRUPTION1STSTEP.PS1_1"/>
+			<ComponentRef Id="FREE_DISK_SPACE.PS1_1"/>
+			<ComponentRef Id="GENERATE_WINDOWSUPDATELOG.PS1_1"/>
+			<ComponentRef Id="GET_LAST_INSTALLED_UPDATES.PS1_1"/>
+			<ComponentRef Id="GET_LOGGED_ON_USER.PS1_1"/>
+			<ComponentRef Id="GET_MODEL.PS1_1"/>
+			<ComponentRef Id="GET_OS_VERSION.PS1_1"/>
+			<ComponentRef Id="GET_POWERSHELL_VERSION.PS1_1"/>
+			<ComponentRef Id="GET_USER_DIR_SIZE.PS1_1"/>
+			<ComponentRef Id="GET_BATTERYSTATS.PS1_1"/>
+			<ComponentRef Id="GET_COMPUTERDRIVERS.PS1_1"/>
+			<ComponentRef Id="GET_COMPUTERDRIVERS.PS1.BAK_1"/>
+			<ComponentRef Id="GET_LASTREBOOT.PS1_1"/>
+			<ComponentRef Id="GET_PENDINGREBOOT.PS1_1"/>
+			<ComponentRef Id="GET_USBDEVICES.PS1_1"/>
+			<ComponentRef Id="GET_USBDEVICES.PS1.BAK_1"/>
+			<ComponentRef Id="GETCOMPUTERCERT.PS1_1"/>
+			<ComponentRef Id="GPUPDATE.PS1_1"/>
+			<ComponentRef Id="LOCATION_SERVICE_REFRESH.PS1_1"/>
+			<ComponentRef Id="LOGOFF_ALL_USERS.PS1_1"/>
+			<ComponentRef Id="RESTART_ENFORCED.PS1_1"/>
+			<ComponentRef Id="SET_WORKINGHOURS.PS1_1"/>
+			<ComponentRef Id="WINDOWSUPDATE_AND_DELIVERYOPTIMIZATION_SETTINGS.PS1_1"/>
+			<ComponentRef Id="StartMenuShortcuts"/>
+		</Feature>
+		<UI/>
+		<UIRef Id="WixUI_Minimal"/>
+		<Icon Id="DesktopIcon.exe" SourceFile="ScriptRunner\ScriptRunner.exe"/>
+		<Icon Id="StartMenuIcon.exe" SourceFile="ScriptRunner\ScriptRunner.exe"/>
+	</Product>
+</Wix>

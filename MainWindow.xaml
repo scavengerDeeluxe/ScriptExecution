@@ -1,0 +1,1674 @@
+﻿<Window
+    x:Class="ScriptRunner.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ScriptRunner"
+    xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:r="http://schemas.lepo.co/wpfui/2022/xaml"
+    Title="ScriptRunner"
+    Width="1030"
+    Height="1080"
+    Background="{DynamicResource ButtonBackgroundBrush}"
+    BorderBrush="{DynamicResource AccentBrush}"
+    Foreground="{DynamicResource ForegroundBrush}"
+    Icon="/Resources/gpt.ico"
+    Loaded="Window_Loaded"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <!--  Window Background  -->
+            <Style TargetType="{x:Type Window}">
+                <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+            </Style>
+            <!--  Button  -->
+            <Style TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="4" />
+                <Setter Property="Padding" Value="8,4" />
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter Property="FontWeight" Value="SemiBold" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
+                                x:Name="ButtonBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                                <ContentPresenter
+                                    Margin="4"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="ButtonBorder" Property="Background" Value="#FF666666" />
+                                    <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#FF444444" />
+                                    <Setter Property="Foreground" Value="#FF999999" />
+                                    <Setter Property="Opacity" Value="0.6" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource TabHoverBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource AccentBrush}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--  Star Button Style  -->
+            <Style x:Key="StarButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="FontFamily" Value="Segoe UI Symbol" />
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter Property="Margin" Value="2" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Width" Value="25" />
+                <Setter Property="Height" Value="25" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Background="{TemplateBinding Background}" BorderThickness="0">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="#FFD700" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--  TabControl & TabItem  -->
+            <Style TargetType="{x:Type TabControl}">
+                <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+            <Style TargetType="{x:Type TabItem}">
+                <Setter Property="Padding" Value="10,4" />
+                <Setter Property="Margin" Value="2,0" />
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter Property="FontWeight" Value="Normal" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TabItem}">
+                            <Border
+                                x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4,4,0,0">
+                                <ContentPresenter
+                                    x:Name="ContentSite"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    ContentSource="Header" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource AccentBrush}" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource AccentBrush}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--  ListBox  -->
+            <Style TargetType="{x:Type ListBoxItem}">
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="Margin" Value="2" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                            <Border
+                                x:Name="Bd"
+                                Background="{DynamicResource ButtonBackgroundBrush}"
+                                BorderBrush="{DynamicResource AccentBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                                <ContentPresenter
+                                    Margin="4"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource AccentBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource TabHoverBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--  ListView and ListViewItem styles  -->
+            <Style TargetType="{x:Type ListView}">
+                <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+            </Style>
+
+            <Style TargetType="{x:Type ListViewItem}">
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="Margin" Value="2" />
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                            <Border
+                                x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{DynamicResource AccentBrush}"
+                                BorderThickness="1"
+                                CornerRadius="4">
+                                <GridViewRowPresenter
+                                    Margin="4"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource AccentBrush}" />
+                                    <Setter Property="Foreground" Value="White" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource TabHoverBrush}" />
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type TreeView}">
+                <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+            </Style>
+            <Style TargetType="{x:Type TreeViewItem}">
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+            </Style>
+            <Style TargetType="{x:Type TextBlock}">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="{DynamicResource AccentBrush}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type ComboBox}">
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Padding" Value="4,2" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ComboBox}">
+                            <Grid>
+                                <ToggleButton
+                                    x:Name="Toggle"
+                                    Background="{DynamicResource ControlBackgroundBrush}"
+                                    BorderBrush="{DynamicResource AccentBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Foreground="{DynamicResource ForegroundBrush}"
+                                    IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+                                    <ContentPresenter
+                                        Margin="{TemplateBinding Padding}"
+                                        VerticalAlignment="Center"
+                                        Content="{TemplateBinding SelectionBoxItem}"
+                                        ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                        TextElement.Foreground="{DynamicResource ForegroundBrush}" />
+                                </ToggleButton>
+                                <Popup
+                                    x:Name="Popup"
+                                    AllowsTransparency="True"
+                                    Focusable="False"
+                                    IsOpen="{TemplateBinding IsDropDownOpen}"
+                                    Placement="Bottom">
+                                    <Border
+                                        Background="{DynamicResource CardBackgroundBrush}"
+                                        BorderBrush="{DynamicResource AccentBrush}"
+                                        BorderThickness="1">
+                                        <ScrollViewer>
+                                            <ItemsPresenter />
+                                        </ScrollViewer>
+                                    </Border>
+                                </Popup>
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="HasItems" Value="False">
+                                    <Setter TargetName="Popup" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--  DataGrid  -->
+            <Style TargetType="{x:Type DataGrid}">
+                <Setter Property="Background" Value="{DynamicResource CardBackgroundBrush}" />
+                <Setter Property="RowBackground" Value="{DynamicResource WindowBackgroundBrush}" />
+                <Setter Property="AlternatingRowBackground" Value="{DynamicResource CardBackgroundBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter Property="GridLinesVisibility" Value="Horizontal" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+            <Style TargetType="{x:Type DataGridRowHeader}">
+                <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />
+                <!--  Dark background  -->
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <!--  Neon blue text  -->
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="Padding" Value="4" />
+                <Setter Property="BorderThickness" Value="0,0,1,1" />
+            </Style>
+            <!--  GroupBox Style  -->
+            <Style TargetType="{x:Type GroupBox}">
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter Property="Padding" Value="5" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type GroupBox}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Border
+                                    Grid.Row="0"
+                                    Grid.RowSpan="2"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="4" />
+                                <ContentPresenter
+                                    Grid.Row="0"
+                                    Margin="8,2,8,0"
+                                    ContentSource="Header"
+                                    TextElement.Foreground="{DynamicResource ForegroundBrush}" />
+                                <ContentPresenter
+                                    Grid.Row="1"
+                                    Margin="{TemplateBinding Padding}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--  TextBox Style  -->
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter Property="Padding" Value="4,2" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type TextBox}">
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="2">
+                                <ScrollViewer x:Name="PART_ContentHost" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--  PasswordBox Style  -->
+            <Style TargetType="{x:Type PasswordBox}">
+                <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter Property="Padding" Value="4,2" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type PasswordBox}">
+                            <Border
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="2">
+                                <ScrollViewer x:Name="PART_ContentHost" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <!--  CheckBox Style  -->
+            <Style TargetType="{x:Type CheckBox}">
+                <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+                <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Padding" Value="4,2" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type CheckBox}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border
+                                    x:Name="CheckBoxBorder"
+                                    Grid.Column="0"
+                                    Width="16"
+                                    Height="16"
+                                    Margin="0,0,4,0"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="2">
+                                    <Path
+                                        x:Name="CheckMark"
+                                        Width="10"
+                                        Height="10"
+                                        Data="M 1,4 L 4,7 L 9,1"
+                                        Stroke="{DynamicResource ForegroundBrush}"
+                                        StrokeThickness="2"
+                                        Visibility="Collapsed" />
+                                </Border>
+                                <ContentPresenter
+                                    Grid.Column="1"
+                                    Margin="{TemplateBinding Padding}"
+                                    VerticalAlignment="Center"
+                                    TextElement.Foreground="{DynamicResource ForegroundBrush}" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
+                                    <Setter TargetName="CheckBoxBorder" Property="Background" Value="{DynamicResource AccentBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="CheckBoxBorder" Property="BorderBrush" Value="{DynamicResource TabHoverBrush}" />
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Foreground" Value="#FF666666" />
+                                    <Setter TargetName="CheckBoxBorder" Property="Background" Value="#FF333333" />
+                                    <Setter TargetName="CheckBoxBorder" Property="BorderBrush" Value="#FF444444" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel Width="1030" Height="1061">
+            <Grid
+                Width="998"
+                Height="83"
+                Background="{DynamicResource WindowBackgroundBrush}"
+                Loaded="Grid_Loaded">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="113*" />
+                    <ColumnDefinition Width="886*" />
+                </Grid.ColumnDefinitions>
+                <Grid
+                    x:Name="TargetGrid"
+                    Grid.Column="1"
+                    Margin="28,10,236,16"
+                    Background="{DynamicResource ControlBackgroundBrush}"
+>
+                    <TextBlock
+                        Margin="24,10,500,10"
+                        FontSize="22"
+                        FontWeight="Bold"
+                        Foreground="{DynamicResource ForegroundBrush}"
+                        Text="TargetPC"
+                        TextWrapping="Wrap" />
+                    <TextBox
+                        x:Name="txt_Target"
+                        Margin="156,10,185,15"
+                        AutomationProperties.Name="TargetPC"
+                        Background="{DynamicResource WindowBackgroundBrush}"
+                        BorderBrush="{DynamicResource AccentBrush}"
+                        FontWeight="Bold"
+                        Foreground="{DynamicResource ForegroundBrush}"
+                        TextChanged="txt_Target_TextChanged"
+                        TextWrapping="Wrap" />
+                    <Button
+                        x:Name="btnTestConnection"
+                        Width="88"
+                        Height="34"
+                        Margin="524,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="{DynamicResource ButtonBackgroundBrush}"
+                        Click="TestConnection_Click"
+                        Content="Test Conn"
+                        Foreground="{DynamicResource ForegroundBrush}" />
+                </Grid>
+                <Slider
+                    x:Name="slider"
+                    Width="66"
+                    Height="34"
+                    Margin="30,18,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Maximum="1"
+                    SmallChange="1"
+                    TickFrequency="0"
+                    ValueChanged="slider_ValueChanged"
+                    Value="1" />
+                <Label
+                    x:Name="label"
+                    Grid.ColumnSpan="2"
+                    Width="37"
+                    Height="33"
+                    Margin="82,42,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Dark"
+                    Foreground="{DynamicResource ForegroundBrush}" />
+                <Label
+                    x:Name="label_Copy"
+                    Width="38"
+                    Height="33"
+                    Margin="8,39,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="Light"
+                    Foreground="{DynamicResource ForegroundBrush}" />
+                <Label
+                    Grid.Column="1"
+                    Width="221"
+                    Height="62"
+                    Margin="654,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Content="ScriptRunr"
+                    FontFamily="Ubuntu Mono"
+                    FontSize="36"
+                    FontWeight="Bold"
+                    Foreground="{DynamicResource ForegroundBrush}" />
+                <Label
+                    Grid.Column="1"
+                    Width="99"
+                    Height="30"
+                    Margin="776,53,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="v1.0.0.0"
+                    FontFamily="Ubuntu Mono"
+                    FontSize="14"
+                    Foreground="{DynamicResource ForegroundBrush}" />
+            </Grid>
+            <TabControl
+                x:Name="tabControl"
+                Width="990"
+                Height="949"
+                Background="{DynamicResource ControlBackgroundBrush}"
+                SelectedIndex="0"
+                SelectionChanged="tabControl_SelectionChanged">
+                <TabItem
+                    x:Name="tabPass"
+                    Height="50"
+                    Margin="9,0,-18,0"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource WindowBackgroundBrush}"
+                    BorderBrush="{DynamicResource AccentBrush}"
+                    BorderThickness="2,2,2,2"
+                    FontFamily="Trebuchet MS"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="{DynamicResource ForegroundBrush}"
+                    IsSelected="True">
+                    <TabItem.Header>
+                        <DockPanel Width="Auto">
+                            <TextBlock
+                                Width="49"
+                                Height="38"
+                                FontFamily="Segoe Fluent Icons"
+                                FontSize="36"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                Text="&#xE705;"
+                                TextAlignment="Center" />
+                            <TextBlock VerticalAlignment="Center" FontSize="13"><Run /><LineBreak /><Run /></TextBlock>
+                        </DockPanel>
+                    </TabItem.Header>
+                    <Grid
+                        Width="592"
+                        Height="438"
+                        Background="{DynamicResource WindowBackgroundBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button
+                            x:Name="btn_saveCreds"
+                            Width="131"
+                            Height="45"
+                            Margin="355,317,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ButtonBackgroundBrush}"
+                            Click="Button_Click"
+                            Content="Save"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            Opacity="1.0"
+                            TabIndex="4" />
+                        <Label
+                            x:Name="credConfirm"
+                            Width="198"
+                            Margin="205,366,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Credential Saved"
+                            FontSize="22"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            Visibility="Hidden" />
+                        <Button
+                            x:Name="btn_resetcreds"
+                            Width="102"
+                            Margin="131,317,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ButtonBackgroundBrush}"
+                            Click="btn_resetcreds_Click"
+                            Content="Reset"
+                            IsEnabled="False"
+                            TabIndex="4" />
+                        <GroupBox
+                            Width="364"
+                            Height="69"
+                            Margin="122,68,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Header="Domain">
+                            <TextBox
+                                x:Name="txt_domain"
+                                Width="228"
+                                Height="29"
+                                Margin="108,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="{DynamicResource WindowBackgroundBrush}"
+                                BorderBrush="{DynamicResource AccentBrush}"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                TabIndex="1"
+                                TextWrapping="Wrap" FontSize="16" />
+                        </GroupBox>
+                        <GroupBox
+                            Width="364"
+                            Height="69"
+                            Margin="122,155,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Header="Username">
+                            <TextBox
+                                x:Name="txtuser"
+                                Width="226"
+                                Height="29"
+                                Margin="113,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="{DynamicResource WindowBackgroundBrush}"
+                                BorderBrush="{DynamicResource AccentBrush}"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                TabIndex="2"
+                                TextChanged="txtuser_TextChanged"
+                                TextWrapping="Wrap" FontSize="16" />
+                        </GroupBox>
+                        <GroupBox
+                            Width="364"
+                            Height="69"
+                            Margin="122,238,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Header="Password">
+                            <PasswordBox
+                                x:Name="pwpass"
+                                Width="224"
+                                Height="29"
+                                Margin="110,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Background="{DynamicResource WindowBackgroundBrush}"
+                                BorderBrush="{DynamicResource AccentBrush}"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                TabIndex="3" FontSize="16" />
+                        </GroupBox>
+                        <Label
+                            x:Name="labelCredReset"
+                            Width="198"
+                            Margin="205,366,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Credential Reset"
+                            FontSize="22"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            Visibility="Hidden" />
+                        <Label
+                            x:Name="credConfirm_Copy"
+                            Width="264"
+                            Margin="172,22,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="*Credentials Reset Between Sessions*"
+                            FontSize="14"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <TextBlock
+                            Margin="-100,465,-74,-178"
+                            FontSize="14"
+                            Foreground="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}"
+                            TextWrapping="Wrap"><Run Text="This tool lets you troubleshoot and investigate remote PCs without bugging the user. It bundles powerful scripts—some of which will interrupt anyone actively using the machine—so please confirm the target PC is idle before you run anything. If you hit a bug or have suggestions, email me at joshua.dahle@state.mn.us. Questions, comments, or feature requests are always welcome." /><LineBreak /><Run /><LineBreak /><Run Text="Use responsibly!" /><LineBreak /><Run /><LineBreak /><Run FontStyle="Italic" Text="Much of this was inspired by Client Center for Configuration Manager by Roger Zander https://github.com/rzander/sccmclictr" /><Run Text=" " /></TextBlock>
+                        <Image
+                            Width="200"
+                            Height="200"
+                            Margin="516,-217,-124,455"
+                            RenderTransformOrigin="0.5,0.5"
+                            Source="/Resources/great-seal-of-the-state-of-minnesota.png"
+                            Stretch="Fill">
+
+                        </Image>
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    x:Name="tabScripts"
+                    Margin="19,0,-24,0"
+                    Background="{DynamicResource WindowBackgroundBrush}"
+                    BorderBrush="{DynamicResource AccentBrush}"
+                    BorderThickness="2,2,2,2"
+                    FontFamily="Trebuchet MS"
+                    FontSize="24"
+                    FontWeight="Bold"
+                    Foreground="{DynamicResource ForegroundBrush}"
+                    IsEnabled="False"
+                    IsSelected="False"
+                    RequestBringIntoView="TabItem_RequestBringIntoView_2">
+                    <TabItem.Header>
+                        <DockPanel Width="Auto">
+                            <TextBlock
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe Fluent Icons"
+                                FontSize="35"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                Text="&#xE945;" />
+                            <TextBlock
+                                Width="50"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                Text="Scripts" />
+                            <TextBlock VerticalAlignment="Center" FontSize="13"><Run /><LineBreak /><Run /></TextBlock>
+                        </DockPanel>
+                    </TabItem.Header>
+                    <Grid
+                        Height="884"
+                        Margin="-15,0,-26,0"
+                        Background="{DynamicResource WindowBackgroundBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <DataGrid
+                            x:Name="dg_logs"
+                            Margin="18,0,18,32"
+                            d:ItemsSource="{d:SampleData ItemCount=5}"
+                            Visibility="Hidden" />
+                        <StackPanel Margin="18,0,18,365" Background="{DynamicResource WindowBackgroundBrush}">
+                            <StackPanel
+                                Width="375"
+                                Height="47"
+                                HorizontalAlignment="Left" />
+                            <StackPanel
+                                Width="375"
+                                Height="314"
+                                HorizontalAlignment="Left">
+                                <TreeView
+                                    x:Name="treeViewScripts"
+                                    Width="364"
+                                    Height="242"
+                                    Background="{DynamicResource ControlBackgroundBrush}"
+                                    BorderBrush="{DynamicResource AccentBrush}"
+                                    FontFamily="Trebuchet MS"
+                                    FontSize="16"
+                                    Foreground="{DynamicResource ForegroundBrush}"
+                                    GotFocus="treeViewScripts_GotFocus"
+                                    MouseDoubleClick="treeViewScripts_MouseDoubleClick"
+                                    SelectedItemChanged="treeViewScripts_SelectedItemChanged">
+                                    <TreeView.ItemTemplate>
+                                        <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                                            <TextBlock Text="{Binding Name}" />
+                                        </HierarchicalDataTemplate>
+                                    </TreeView.ItemTemplate>
+                                    <Expander
+                                        Width="100"
+                                        Height="100"
+                                        Header="Expander">
+                                        <Grid Background="#FFE5E5E5" />
+                                    </Expander>
+                                </TreeView>
+
+                                <!--  Star Rating Control  -->
+                                <StackPanel
+                                    x:Name="RatingPanel"
+                                    Margin="5,10,0,0"
+                                    HorizontalAlignment="Left"
+                                    Orientation="Horizontal"
+                                    Visibility="Collapsed">
+                                    <Label
+                                        Margin="0,0,10,0"
+                                        VerticalAlignment="Center"
+                                        Content="Rate this script:"
+                                        FontSize="12"
+                                        Foreground="{DynamicResource ForegroundBrush}" />
+                                    <Button
+                                        x:Name="star1"
+                                        Click="Star_Click"
+                                        Content="☆"
+                                        Style="{StaticResource StarButtonStyle}"
+                                        Tag="1" />
+                                    <Button
+                                        x:Name="star2"
+                                        Click="Star_Click"
+                                        Content="☆"
+                                        Style="{StaticResource StarButtonStyle}"
+                                        Tag="2" />
+                                    <Button
+                                        x:Name="star3"
+                                        Click="Star_Click"
+                                        Content="☆"
+                                        Style="{StaticResource StarButtonStyle}"
+                                        Tag="3" />
+                                    <Button
+                                        x:Name="star4"
+                                        Click="Star_Click"
+                                        Content="☆"
+                                        Style="{StaticResource StarButtonStyle}"
+                                        Tag="4" />
+                                    <Button
+                                        x:Name="star5"
+                                        Click="Star_Click"
+                                        Content="☆"
+                                        Style="{StaticResource StarButtonStyle}"
+                                        Tag="5" />
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                        <Grid Margin="711,2,16,398">
+                            <Button
+                                x:Name="OpenScriptLogs"
+                                Margin="-460,452,633,0"
+                                Background="{DynamicResource ButtonBackgroundBrush}"
+                                Click="OpenLogsPopou"
+                                Content="Pop-Out Logs"
+                                FontFamily="Trebuchet MS"
+                                FontSize="16"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                RenderTransformOrigin="0.529,0.455" />
+                            <TextBlock
+                                x:Name="lbl_scriptName"
+                                Width="41"
+                                Height="38"
+                                Margin="-305,446,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                FontFamily="Segoe Fluent Icons"
+                                FontSize="36"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                MouseLeftButtonDown="OpenscriptPopout_Click_1"
+                                Text="&#xE70B;" />
+
+                            <Button
+                                x:Name="script"
+                                Margin="530,-226,-470,613"
+                                Click="script_Click"
+                                Content="Save script"
+                                IsEnabled="False"
+                                Visibility="Hidden" />
+                            <ListView
+                                x:Name="lsv_jobs"
+                                Margin="66,10,19,10"
+                                d:ItemsSource="{d:SampleData ItemCount=5}"
+                                Background="{DynamicResource ControlBackgroundBrush}"
+                                BorderBrush="{DynamicResource AccentBrush}"
+                                FontSize="12"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                ItemsSource="{Binding Jobs}"
+                                SelectionChanged="lsv_jobs_SelectionChanged">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn DisplayMemberBinding="{Binding TargetPC}" Header="Target" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding Status}" Header="Status" />
+                                        <GridViewColumn DisplayMemberBinding="{Binding ScriptName}" Header="script" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </Grid>
+                        <TextBox
+                            x:Name="editorscript"
+                            Width="345"
+                            Height="434"
+                            Margin="0,0,274,444"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Background="{DynamicResource WindowBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            FontFamily="Cascadia Code SemiBold"
+                            FontSize="14"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            LostFocus="editorscript_LostFocus"
+                            UseLayoutRounding="True"
+                            AcceptsReturn="True"
+                            AcceptsTab="True"
+                            ScrollViewer.VerticalScrollBarVisibility="Auto"
+                            ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                            TextWrapping="Wrap" />
+                        <TextBox
+                            x:Name="search"
+                            Width="195"
+                            Height="31"
+                            Margin="111,6,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            FontSize="18"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            RenderTransformOrigin="0.469,0.566"
+                            TextAlignment="Center"
+                            TextChanged="search_TextChanged"
+                            TextWrapping="Wrap" />
+                        <Label
+                            Width="77"
+                            Height="34"
+                            Margin="29,6,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Search"
+                            FontSize="18"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <Button
+                            Margin="25,449,782,392"
+                            Background="{DynamicResource ButtonBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            Click="Button_Click_4"
+                            Content="Add Your Scripts"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <Button
+                            x:Name="btn_execute"
+                            Width="121"
+                            Height="31"
+                            Margin="630,455,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ButtonBackgroundBrush}"
+                            Click="Button_Click_1"
+                            Content="EXECUTE"
+                            FontFamily="Trebuchet MS"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            Opacity="1"
+                            RenderTransformOrigin="0.512,0.725" />
+                        <StackPanel Margin="0,519,0,0">
+                            <TabControl Height="365">
+                                <TabItem Header="Results" Margin="2,0,-21,0">
+                                    <Grid Background="#FFE5E5E5">
+                        <RichTextBox
+                            x:Name="editorLogs"
+                            Margin="10,0,11,0"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            FontSize="12"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            IsReadOnly="True"
+                            IsUndoEnabled="False"
+                            ScrollViewer.CanContentScroll="True"
+                            SelectionBrush="{DynamicResource AccentBrush}"
+                            TextChanged="editorLogs_TextChanged"
+                            VerticalScrollBarVisibility="Auto" />
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Header="DataGrid" Margin="22,0,-32,0">
+                                    <Grid Background="#FFE5E5E5">
+                        <DataGrid
+                            x:Name="DG_Logs"
+                            Margin="10,4,10,-16"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            FontSize="12"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            LoadingRow="DG_Logs_LoadingRow" RenderTransformOrigin="0.5,0.5">
+
+                            <DataGridColumnHeader Background="{DynamicResource WindowBackgroundBrush}" />
+                        </DataGrid>
+                                    </Grid>
+                                </TabItem>
+                                <TabItem Header="Debug" Margin="38,0,-67,0">
+                                    <Grid Background="#FFE5E5E5">
+                                        <TextBox x:Name="immediateWindowOutput"
+                                           Margin="10,0,10,0"
+                                            Background="{DynamicResource ControlBackgroundBrush}"
+                                            BorderBrush="{DynamicResource AccentBrush}"
+                                            FontSize="12"
+                                            Foreground="{DynamicResource ForegroundBrush}"
+                                            IsReadOnly="True"
+                                            IsUndoEnabled="False"
+                                            ScrollViewer.CanContentScroll="True"
+                                            SelectionBrush="{DynamicResource AccentBrush}"
+                                            TextChanged="editorLogs_TextChanged"
+                                            VerticalScrollBarVisibility="Auto" />
+                                    </Grid>
+                                </TabItem>
+                            </TabControl>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    x:Name="tabTasks"
+                    Margin="25,0,-42,0"
+                    BorderBrush="{DynamicResource AccentBrush}"
+                    BorderThickness="2,2,2,2"
+                    FontFamily="Trebuchet MS"
+                    FontSize="24"
+                    FontWeight="DemiBold"
+                    Foreground="{DynamicResource ForegroundBrush}"
+                    IsEnabled="False"
+                    RequestBringIntoView="TabItem_RequestBringIntoView_1">
+                    <TabItem.Header>
+
+                        <DockPanel Width="Auto">
+                            <TextBlock
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe Fluent Icons"
+                                FontSize="35"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                Text="&#xE756;" />
+                            <TextBlock VerticalAlignment="Center" FontSize="13"><Run /><LineBreak /><Run /></TextBlock>
+                        </DockPanel>
+                    </TabItem.Header>
+                    <DockPanel
+                        Width="970"
+                        Height="822"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="{DynamicResource WindowBackgroundBrush}"
+                        LastChildFill="False">
+                        <ToolBarPanel Width="274" >
+                            <StackPanel Height="100">
+                                <Menu Height="92" Width="126">
+                                    <MenuItem Header="Eventvwr"/>
+                                    <MenuItem Header="Compmgmt.msc"/>
+                                    <MenuItem Header="Connect to C$"/>
+                                    <MenuItem Header="Explore Printers"/>
+                                </Menu>
+                            </StackPanel>
+                            <ToolBar Height="264" Width="112">
+                                <ListBoxItem Content="Eventvwr" Height="57"/>
+                                <Button Content="Compmgmt.msc"/>
+                                <ListBoxItem Content="Connect to C$"/>
+                                <ListBoxItem Content="Explore Printers"/>
+                            </ToolBar>
+                        </ToolBarPanel>
+                        <!-- Removed the following invalid and unsupported line to resolve XDG0006, XDG0008, and XLS0414:
+                             <UIElement:ThumbRate>
+                             - The namespace prefix "UIElement" is not defined.
+                             - ThumbRate is not a valid WPF element.
+                             - The type 'UIElement:ThumbRate' does not exist in WPF.
+                             No replacement is needed.-->
+
+                        <ListView
+                            x:Name="lsv_adminTools"
+                            Width="233"
+                            Height="426"
+                            Margin="33,0,-6,0"
+                            Background="{DynamicResource WindowBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            DisplayMemberPath="Name"
+                            FontSize="18"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            IsSynchronizedWithCurrentItem="True"
+                            MouseDoubleClick="lsv_adminTools_MouseDoubleClick"
+                            SelectionMode="Single"
+                            SnapsToDevicePixels="True" />
+                        <StackPanel Width="179" Height="268">
+                            <Grid Width="202" Height="204">
+                                <Label
+                                    Width="150"
+                                    Height="40"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Content="Launch PS"
+                                    Foreground="{DynamicResource ForegroundBrush}" />
+                                <Button
+                                    Width="57"
+                                    Height="52"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Click="Button_Click_3"
+                                    Content="" Margin="70,5,0,0">
+                                    <Button.Background>
+                                        <ImageBrush ImageSource="/Resources/4.ico" />
+                                    </Button.Background>
+                                </Button>
+                            </Grid>
+                            <Grid Width="550" Height="402" />
+                        </StackPanel>
+                        <Grid DockPanel.Dock="Left" Width="100"/>
+                    </DockPanel>
+                </TabItem>
+                <TabItem
+                    x:Name="tabWmi"
+                    Margin="44,0,-54,0"
+                    BorderBrush="{DynamicResource AccentBrush}"
+                    BorderThickness="2,2,2,2"
+                    FontFamily="Trebuchet MS"
+                    FontSize="24"
+                    FontWeight="DemiBold"
+                    Foreground="{DynamicResource ForegroundBrush}"
+                    IsEnabled="False"
+                    RequestBringIntoView="TabItem_RequestBringIntoView_1"
+                    ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                    <TabItem.Header>
+                        <DockPanel Width="Auto" Height="46">
+                            <TextBlock
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe UI Variable Display Semibold"
+                                FontSize="35"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                Text="🖧" />
+                            <TextBlock
+                                Width="42"
+                                Height="24"
+                                FontSize="20"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                Text="WMI" />
+                            <TextBlock VerticalAlignment="Center" FontSize="13"><Run /><LineBreak /><Run /></TextBlock>
+                        </DockPanel>
+                    </TabItem.Header>
+                    <Grid
+                        Width="979"
+                        Height="842"
+                        Margin="3,0,-9,0"
+                        Background="{DynamicResource WindowBackgroundBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBox
+                            x:Name="txtWmiTargets"
+                            Margin="30,110,787,531"
+                            AcceptsReturn="True"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            FontSize="12"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            TextWrapping="Wrap"/>
+                        <Label
+                            Width="108"
+                            Margin="52,20,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Targets"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <Label
+                            Width="88"
+                            Margin="240,16,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="*Namespace"
+                            FontSize="14"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            RenderTransformOrigin="0.5,0.5" />
+                        <ComboBox
+                            x:Name="cb_WmiNamespace"
+                            Width="337"
+                            Height="31"
+                            Margin="332,14,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            FontSize="14"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            SelectionChanged="cb_WmiNamespace_SelectionChanged" />
+                        <Label
+                            Width="61"
+                            Margin="260,55,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="*Class"
+                            FontSize="14"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <ComboBox
+                            x:Name="cb_WmiClass"
+                            Width="331"
+                            Margin="334,58,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            FontSize="12"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            SelectionChanged="cb_WmiClass_SelectionChanged" />
+                        <Label
+                            Width="78"
+                            Margin="254,93,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Content="Properties"
+                            FontSize="14"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <ListBox
+                            x:Name="lb_WmiProperties"
+                            Width="323"
+                            Height="70"
+                            Margin="342,87,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            FontSize="10"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            SelectionMode="Extended">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding}" IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Button
+                            x:Name="btnBuildWmiQuery"
+                            Width="72"
+                            Height="40"
+                            Margin="390,162,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ButtonBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            Click="btnBuildWmiQuery_Click"
+                            Content="Build"
+                            FontSize="14"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <Label
+                            Width="66"
+                            Margin="274,203,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ButtonBackgroundBrush}"
+                            Content="Query"
+                            FontSize="14"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <TextBox
+                            x:Name="txt_wmiQuery"
+                            Width="514"
+                            Height="33"
+                            Margin="274,234,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            FontSize="12"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            TextWrapping="Wrap" />
+                        <Button
+                            x:Name="btnRunWmiQuery"
+                            Width="69"
+                            Height="31"
+                            Margin="808,236,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ButtonBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            Click="btnRunWmiQuery_Click"
+                            Content="Query"
+                            FontSize="13"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <Button
+                            x:Name="btnAbortWmiQuery"
+                            Width="62"
+                            Height="33"
+                            Margin="207,234,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ButtonBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            Content="Abort"
+                            FontSize="13"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <Button
+                            x:Name="btnLoadQuery"
+                            Width="48"
+                            Height="24"
+                            Margin="772,185,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ButtonBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            Click="btnLoadQuery_Click"
+                            Content="Load"
+                            FontSize="13"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <Label
+                            Margin="23,58,767,718"
+                            Content="line sperated IPs or CIDR eg 192.168.0.0/24"
+                            FontSize="14"
+                            FontStyle="Italic"
+                            FontWeight="Bold"
+                            Foreground="{DynamicResource ForegroundBrush}" />
+                        <ListBox
+                            x:Name="lb_savedQueries"
+                            Width="195"
+                            Height="167"
+                            Margin="698,16,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            FontSize="10"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            SelectionChanged="lb_savedQueries_SelectionChanged" />
+                        <ProgressBar
+                            x:Name="pb_Wmi"
+                            Width="378"
+                            Height="26"
+                            Margin="332,285,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            LargeChange="10"
+                            Maximum="{Binding WmiProgressMax, Mode=OneWay}"
+                            Value="{Binding WmiProgress, Mode=OneWay}" />
+                        <TextBox
+                            x:Name="wmi_logs"
+                            Width="933"
+                            Height="113"
+                            Margin="0,728,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Top"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            FontSize="12"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            HorizontalScrollBarVisibility="Auto"
+                            ScrollViewer.CanContentScroll="True"
+                            TextWrapping="Wrap"
+                            VerticalScrollBarVisibility="Auto" />
+                        <DataGrid
+                            x:Name="dgWmiResults"
+                            Width="919"
+                            Height="375"
+                            Margin="37,345,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Panel.ZIndex="6"
+                            Background="{DynamicResource ControlBackgroundBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}"
+                            ClipboardCopyMode="IncludeHeader"
+                            FontSize="13"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            HorizontalGridLinesBrush="{DynamicResource AccentBrush}"
+                            HorizontalScrollBarVisibility="Visible"
+                            RowHeight="15"
+                            VerticalGridLinesBrush="{DynamicResource AccentBrush}"
+                            VerticalScrollBarVisibility="Visible">
+                            <DataGrid.RowHeaderStyle>
+                                <Style TargetType="{x:Type DataGridRowHeader}">
+                                    <Setter Property="Background" Value="{DynamicResource ButtonBackgroundBrush}" />
+                                    <!--  Dark background  -->
+                                    <Setter Property="Foreground" Value="{DynamicResource ForegroundBrush}" />
+                                    <!--  Neon blue text  -->
+                                    <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                                    <Setter Property="Padding" Value="4" />
+                                    <Setter Property="BorderThickness" Value="0,0,1,1" />
+                                </Style>
+                            </DataGrid.RowHeaderStyle>
+                        </DataGrid>
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    x:Name="RemedyTab"
+                    Margin="56,0,-69,0"
+                    Background="{DynamicResource WindowBackgroundBrush}"
+                    BorderBrush="{DynamicResource AccentBrush}"
+                    BorderThickness="2,2,2,2"
+                    FontSize="24"
+                    Foreground="{DynamicResource ForegroundBrush}"
+                    RequestBringIntoView="RemedyTab_RequestBringIntoView">
+                    <TabItem.Header>
+                        <DockPanel Width="Auto">
+                            <TextBlock
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                FontFamily="Segoe Fluent Icons"
+                                FontSize="35"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                Text="&#xEADF;" />
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="16"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                Text="CMDB" />
+                            <TextBlock VerticalAlignment="Center" FontSize="13"><Run /><LineBreak /><Run /></TextBlock>
+                        </DockPanel>
+                    </TabItem.Header>
+                    <Grid
+                        x:Name="grid"
+                        Width="432"
+                        Height="581"
+                        Margin="0,1,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Top">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="25*" />
+                            <ColumnDefinition Width="47*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid
+                            x:Name="NormalGrid"
+                            Grid.ColumnSpan="2"
+                            Margin="-218,0,-225,-119"
+                            Background="{DynamicResource WindowBackgroundBrush}">
+                            <ComboBox
+                                x:Name="cmb_crit"
+                                Width="322"
+                                Height="35"
+                                Margin="166,72,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                AutomationProperties.Name=""
+                                Background="{DynamicResource ControlBackgroundBrush}"
+                                DisplayMemberPath="critName"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="22"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                SelectedIndex="0"
+                                SelectedValuePath="critValue"
+                                TabIndex="3" />
+                            <TextBox
+                                x:Name="tb_targets"
+                                Margin="31,209,362,92"
+                                AcceptsReturn="True"
+                                AutomationProperties.Name=""
+                                Background="{DynamicResource ControlBackgroundBrush}"
+                                BorderBrush="{DynamicResource AccentBrush}"
+                                FontSize="14"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                IsTabStop="False"
+                                Text="Paste Values Here&#xD;&#xA;&#xD;&#xA;Double click to select all&#xD;&#xA;Copy to clipboard will place in your clipboard a value&#xD;&#xA;to paste into the Advanced Search bar.  This will allow&#xD;&#xA;any number of values to be retrieved on the same tab.&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;Any questions please email joshua.dahle@state.mn.us&#xD;&#xA;&#xD;&#xA;Use &quot;*&quot; in a query for a wildcard. &#xD;&#xA;&#xD;&#xA;CI Name search &quot;*1881965&quot; will result in R32-1881965 being shown."
+                                TextWrapping="Wrap" />
+                            <ComboBox
+                                x:Name="cmb_type"
+                                Width="324"
+                                Height="35"
+                                Margin="164,20,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                AutomationProperties.Name=""
+                                Background="{DynamicResource ControlBackgroundBrush}"
+                                DisplayMemberPath="critName"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="22"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                IsReadOnly="True"
+                                RenderTransformOrigin="0.509,1.37"
+                                SelectedIndex="0"
+                                SelectedValuePath="critValue"
+                                SelectionChanged="cmb_type_SelectionChanged"
+                                TabIndex="2" />
+                            <Label
+                                Width="122"
+                                Height="43"
+                                Margin="30,72,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                AutomationProperties.Name=""
+                                Content="Criteria"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="22"
+                                Foreground="{DynamicResource ForegroundBrush}" />
+                            <Label
+                                Width="76"
+                                Height="41"
+                                Margin="0,20,717,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                AutomationProperties.Name=""
+                                Content="Type"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="22"
+                                Foreground="{DynamicResource ForegroundBrush}" />
+                            <Button
+                                x:Name="btn_clipboard"
+                                Width="156"
+                                Height="32"
+                                Margin="32,620,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                AutomationProperties.Name=""
+                                Background="{DynamicResource ButtonBackgroundBrush}"
+                                Click="btn_clipboard_Click"
+                                Content="ToClipboard"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="22"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                IsTabStop="False" />
+                            <Label
+                                x:Name="lbl_Total"
+                                Width="48"
+                                Height="32"
+                                Margin="540,256,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                HorizontalContentAlignment="Center"
+                                Content="0"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="22"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                RenderTransformOrigin="-1.667,4.408" />
+                            <Button
+                                x:Name="btn_q_Copy"
+                                Width="76"
+                                Height="32"
+                                Margin="424,613,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                AutomationProperties.AccessKey=""
+                                AutomationProperties.Name=""
+                                Background="{DynamicResource ButtonBackgroundBrush}"
+                                Click="btn_query_Click"
+                                Content="Go"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="22"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                IsDefault="True"
+                                IsTabStop="True"
+                                KeyboardNavigation.AcceptsReturn="True"
+                                RenderTransformOrigin="0.543,0.613"
+                                TabIndex="1" />
+                            <Label
+                                Width="122"
+                                Margin="704,62,0,610"
+                                HorizontalAlignment="Left"
+                                Content="Developed by Josh Dahle"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="10"
+                                Foreground="{DynamicResource ForegroundBrush}" />
+                            <Label
+                                Width="122"
+                                Height="38"
+                                Margin="32,119,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                AutomationProperties.Name=""
+                                Content="Operator"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="22"
+                                Foreground="{DynamicResource ForegroundBrush}" />
+                            <ComboBox
+                                x:Name="cmb_operator"
+                                Width="80"
+                                Height="35"
+                                Margin="185,119,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                AutomationProperties.Name=""
+                                Background="{DynamicResource ButtonBackgroundBrush}"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="22"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                SelectedIndex="0"
+                                TabIndex="3">
+                                <ComboBoxItem Content="LIKE" />
+                                <ComboBoxItem Content="!=" />
+                                <ComboBoxItem Content="&gt;" />
+                                <ComboBoxItem Content="&lt;" />
+                            </ComboBox>
+                            <Label
+                                Width="135"
+                                Height="43"
+                                Margin="212,609,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="Batch Size"
+                                Foreground="{DynamicResource ForegroundBrush}" />
+                            <Slider
+                                x:Name="slide_batch"
+                                Width="120"
+                                Margin="212,649,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                LargeChange="10"
+                                Maximum="38"
+                                Minimum="1"
+                                SmallChange="1"
+                                ValueChanged="slide_batch_ValueChanged"
+                                Value="38" />
+                            <Label
+                                x:Name="batchSizeLabel"
+                                Margin="246,641,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Content="39"
+                                Foreground="{DynamicResource ForegroundBrush}" />
+                            <Label
+                                Width="97"
+                                Margin="56,654,0,10"
+                                HorizontalAlignment="Left"
+                                AutomationProperties.Name=""
+                                Content="In this query"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="11"
+                                Foreground="{DynamicResource ForegroundBrush}" />
+                            <Label
+                                Width="98"
+                                Margin="413,649,0,26"
+                                HorizontalAlignment="Left"
+                                AutomationProperties.Name=""
+                                Content="OR CTRL+Enter"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="11"
+                                Foreground="{DynamicResource ForegroundBrush}" />
+                            <ComboBox
+                                x:Name="cmb_crsit"
+                                Width="322"
+                                Height="35"
+                                Margin="164,162,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                AutomationProperties.Name=""
+                                Background="{DynamicResource ControlBackgroundBrush}"
+                                DisplayMemberPath="critName"
+                                FontFamily="Cascadia Code SemiBold"
+                                FontSize="22"
+                                Foreground="{DynamicResource ForegroundBrush}"
+                                SelectedIndex="0"
+                                SelectedValuePath="critValue"
+                                TabIndex="3" />
+                            <Image
+                                x:Name="image"
+                                Width="66"
+                                Height="50"
+                                Margin="704,5,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Source="/Resources/1004.ico" />
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem
+                    x:Name="tabBlank"
+                    Width="Auto"
+                    Height="Auto"
+                    Margin="4,0,-4,0"
+                    IsSelected="True">
+                    <Grid
+                        Background="{DynamicResource ControlBackgroundBrush}">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="18"
+                            Foreground="{DynamicResource ForegroundBrush}"
+                            Text="Welcome to ScriptRunner!" />
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <Grid Height="4" />
+
+        </StackPanel>
+        <Grid Width="1" Height="1007" />
+
+    </DockPanel>
+
+</Window>
