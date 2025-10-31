@@ -1,0 +1,30 @@
+﻿<Window
+    x:Class="ScriptRunner.ScriptEditorWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ScriptRunner"
+    Title="ScriptRunner Editor"
+    Width="800"
+    Height="450"
+    Background="{DynamicResource WindowBackgroundBrush}"
+    BorderBrush="{DynamicResource AccentBrush}"
+    Foreground="{DynamicResource ForegroundBrush}"
+    Icon="/Resources/4.ico">
+
+    <Grid>
+        <TextBox
+            x:Name="editorPopout"
+            Margin="10,10,10,10"
+            Background="{DynamicResource ControlBackgroundBrush}"
+            BorderBrush="{DynamicResource AccentBrush}"
+            FontFamily="Consolas"
+            FontSize="14"
+            UseLayoutRounding="True" />
+        <Button
+            Margin="10"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Click="SaveAndClose_Click"
+            Content="Save and Close" />
+    </Grid>
+</Window>

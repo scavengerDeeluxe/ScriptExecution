@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SyntaxDefinition name="PowerShell Dracula" extensions=".ps1;.psm1" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+
+</SyntaxDefinition>
